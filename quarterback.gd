@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 100  # Normal movement speed
-@export var sprint_speed = 200  # Sprint speed
+@export var sprint_speed = 150  # Sprint speed
 @export var max_stamina = 100  # Maximum stamina
 @export var stamina_depletion_rate = 40  # Stamina drained per second
 
@@ -33,7 +33,7 @@ func _process(delta):
 	move_and_slide()
 
 	# Debug stamina (optional)
-	print("Stamina:", current_stamina)
+	#print("Stamina:", current_stamina)
 
 # Reset stamina for a new play
 func reset_stamina():

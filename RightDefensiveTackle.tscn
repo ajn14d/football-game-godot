@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3di2a3a5tct5"]
+
+[ext_resource type="Script" path="res://right_defensive_tackle.gd" id="1_re4kc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qlis"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2jo6"]
+radius = 8.0
+height = 36.0
+
+[node name="RightDefensiveTackle" type="RigidBody2D" groups=["DT"]]
+collision_layer = 16
+collision_mask = 257
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_re4kc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["DT"]]
+modulate = Color(0.424816, 0.459876, 1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1qlis")
+
+[node name="DetectionArea" type="Area2D" parent="." groups=["DT"]]
+collision_layer = 16
+collision_mask = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" groups=["DT"]]
+modulate = Color(1, 1, 1, 0.305882)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r2jo6")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

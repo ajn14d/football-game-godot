@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt36fs0g4lueb"]
+[gd_scene load_steps=4 format=3 uid="uid://bt36fs0g4lueb"]
 
 [ext_resource type="Script" path="res://quarterback.gd" id="1_ku823"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qlis"]
 radius = 6.0
 
-[node name="Quarterback" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awt21"]
+radius = 8.0
+height = 34.0
+
+[node name="Quarterback" type="CharacterBody2D" groups=["QB"]]
 script = ExtResource("1_ku823")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -13,4 +17,10 @@ modulate = Color(0.424816, 0.459876, 1, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1qlis")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_mask = 32784
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+modulate = Color(1, 1, 1, 0.309804)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_awt21")

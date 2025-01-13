@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bijo5ficuekdb"]
+
+[ext_resource type="Texture2D" uid="uid://e32ska1fbbkn" path="res://art/football.png" id="1_d1ynf"]
+[ext_resource type="Script" path="res://football.gd" id="1_i3dig"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q87yi"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t6k8y"]
+radius = 5.0
+height = 16.0
+
+[node name="Football" type="RigidBody2D" groups=["football"]]
+collision_layer = 32768
+script = ExtResource("1_i3dig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_q87yi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -4.76837e-07)
+rotation = 1.5708
+scale = Vector2(0.388889, 0.4375)
+texture = ExtResource("1_d1ynf")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+modulate = Color(1, 1, 1, 0.231373)
+shape = SubResource("CapsuleShape2D_t6k8y")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

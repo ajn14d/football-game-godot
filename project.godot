@@ -15,6 +15,14 @@ run/main_scene="res://game_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://art/icon.svg"
 
+[global_group]
+
+QB=""
+DT=""
+OT=""
+OG=""
+football=""
+
 [input]
 
 move_up={
@@ -46,3 +54,13 @@ sprint={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="QB"
+2d_physics/layer_2="RB"
+2d_physics/layer_3="WR"
+2d_physics/layer_4="OT"
+2d_physics/layer_5="DT"
+2d_physics/layer_9="OG"
+2d_physics/layer_16="football"
