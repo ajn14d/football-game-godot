@@ -17,7 +17,7 @@ func _ready():
 	
 	# Create and configure the Timer node
 	block_timer = Timer.new()
-	block_timer.wait_time = 1.0  # 1 second interval
+	block_timer.wait_time = 2.0  # 1 second interval
 	block_timer.one_shot = false  # Keep repeating until manually stopped
 	add_child(block_timer)
 	block_timer.connect("timeout", Callable(self, "_on_try_break_block"))

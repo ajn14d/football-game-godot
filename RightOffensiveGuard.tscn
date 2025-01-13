@@ -6,12 +6,12 @@
 radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_84mx2"]
-radius = 8.0
-height = 36.0
+radius = 4.0
+height = 22.0
 
 [node name="RightOffensiveGuard" type="RigidBody2D" groups=["OG"]]
 collision_layer = 256
-collision_mask = 16
+collision_mask = 0
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_0hs7i")

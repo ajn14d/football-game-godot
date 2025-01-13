@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var speed = 30  # Speed at which the tackle chases the QB
+@export var speed = 20  # Speed at which the tackle chases the QB
 
 # Reference to the RDT node
 var rdt: Node2D

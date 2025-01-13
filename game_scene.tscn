@@ -27,13 +27,13 @@ rotation = 1.5708
 position = Vector2(366, -51)
 
 [node name="RightDefensiveTackle" parent="Players" instance=ExtResource("3_0ieph")]
-position = Vector2(265, -20)
+position = Vector2(263, -20.0017)
 
 [node name="RightOffensiveTackle" parent="Players" instance=ExtResource("4_fgsa7")]
-position = Vector2(306, -25)
+position = Vector2(308, -25.0018)
 
 [node name="LeftOffensiveGuard" parent="Players" instance=ExtResource("5_0u7co")]
-position = Vector2(306, -79.0018)
+position = Vector2(309, -79.0018)
 
 [node name="LeftDefensiveTackle" parent="Players" instance=ExtResource("6_w1o02")]
-position = Vector2(267, -85.0017)
+position = Vector2(265, -85.0017)
