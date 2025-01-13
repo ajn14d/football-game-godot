@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt36fs0g4lueb"]
+
+[ext_resource type="Script" path="res://quarterback.gd" id="1_ku823"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qlis"]
+radius = 6.0
+
+[node name="Quarterback" type="CharacterBody2D"]
+script = ExtResource("1_ku823")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.424816, 0.459876, 1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1qlis")
+
+[node name="Camera2D" type="Camera2D" parent="."]

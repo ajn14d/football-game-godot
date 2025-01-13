@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://1iu8uo0ds55w"]
+
+[ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
+[ext_resource type="PackedScene" uid="uid://bt36fs0g4lueb" path="res://quarterback.tscn" id="2_mgcvx"]
+
+[node name="GameScene" type="Node2D"]
+
+[node name="FieldArt" type="Sprite2D" parent="."]
+z_index = -1
+rotation = 1.5708
+texture = ExtResource("1_l4xoe")
+
+[node name="Players" type="Node2D" parent="FieldArt"]
+position = Vector2(200, 0)
+
+[node name="Quarterback" parent="FieldArt/Players" instance=ExtResource("2_mgcvx")]
+position = Vector2(332, -44)
