@@ -2,8 +2,8 @@ extends RigidBody2D
 
 @export var speed = 40  # Speed at which the tackle chases the QB
 
-# Reference to the QB node
-var quarterback: Node2D
+# Reference to the Football node
+var football: Node2D
 
 # Flag to stop pursuing the QB
 var is_blocked = false
@@ -12,8 +12,8 @@ var is_blocked = false
 var block_timer: Timer
 
 func _ready():
-	# Find the quarterback node in the scene
-	quarterback = get_parent().get_node("Quarterback")
+	# Find the football node in the scene
+	football = get_node("/root/GameScene/Football")
 	
 	# Create and configure the Timer node
 	block_timer = Timer.new()
@@ -23,8 +23,8 @@ func _ready():
 	block_timer.connect("timeout", Callable(self, "_on_try_break_block"))
 
 func _physics_process(delta):
-	if not quarterback:
-		return  # No QB found; do nothing
+	if not football:
+		return  # No football found; do nothing
 
 	# Only call pursue if RDT is not blocked
 	if not is_blocked:
@@ -33,10 +33,10 @@ func _physics_process(delta):
 # Function to move the RDT towards the QB
 func pursue():
 	# Calculate direction to the QB
-	var direction_to_qb = (quarterback.global_position - global_position).normalized()
+	var direction_to_football = (football.global_position - global_position).normalized()
 
 	# Set the RDT's velocity directly
-	linear_velocity = direction_to_qb * speed
+	linear_velocity = direction_to_football * speed
 
 # Function to stop movement (called during a block)
 func blocked():

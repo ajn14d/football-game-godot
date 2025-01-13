@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=9 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
 [ext_resource type="PackedScene" uid="uid://bt36fs0g4lueb" path="res://quarterback.tscn" id="2_mgcvx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://fxc5vr6kjebj" path="res://RightOffensiveGuard.tscn" id="4_fgsa7"]
 [ext_resource type="PackedScene" uid="uid://qs64brtbrrnn" path="res://LeftOffensiveGuard.tscn" id="5_0u7co"]
 [ext_resource type="PackedScene" uid="uid://14mxj3qrlha2" path="res://LeftDefensiveTackle.tscn" id="6_w1o02"]
+[ext_resource type="PackedScene" uid="uid://ymo1lx443n7x" path="res://runningback.tscn" id="8_xl2ct"]
 
 [node name="GameScene" type="Node2D"]
 
@@ -37,3 +38,6 @@ position = Vector2(309, -79.0018)
 
 [node name="LeftDefensiveTackle" parent="Players" instance=ExtResource("6_w1o02")]
 position = Vector2(265, -85.0017)
+
+[node name="Runningback" parent="Players" instance=ExtResource("8_xl2ct")]
+position = Vector2(366, -9.00205)
