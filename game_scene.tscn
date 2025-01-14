@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=11 format=3 uid="uid://1iu8uo0ds55w"]
 
+[ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
 [ext_resource type="PackedScene" uid="uid://bt36fs0g4lueb" path="res://quarterback.tscn" id="2_mgcvx"]
 [ext_resource type="PackedScene" uid="uid://bijo5ficuekdb" path="res://football.tscn" id="2_wlkau"]
@@ -9,15 +10,19 @@
 [ext_resource type="PackedScene" uid="uid://14mxj3qrlha2" path="res://LeftDefensiveTackle.tscn" id="6_w1o02"]
 [ext_resource type="PackedScene" uid="uid://ymo1lx443n7x" path="res://runningback.tscn" id="8_xl2ct"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gd3f"]
+size = Vector2(977.258, 4)
+
 [node name="GameScene" type="Node2D"]
+script = ExtResource("1_68k8h")
 
 [node name="FieldArt" type="Sprite2D" parent="."]
 z_index = -1
+position = Vector2(-59, 56)
 rotation = 1.5708
 texture = ExtResource("1_l4xoe")
 
 [node name="Football" parent="." instance=ExtResource("2_wlkau")]
-position = Vector2(54, 497)
 gravity_scale = 0.0
 
 [node name="Players" type="Node2D" parent="."]
@@ -25,19 +30,99 @@ position = Vector2(-0.000723998, 200)
 rotation = 1.5708
 
 [node name="Quarterback" parent="Players" instance=ExtResource("2_mgcvx")]
-position = Vector2(366, -51)
+position = Vector2(-112, -1.00032)
 
 [node name="RightDefensiveTackle" parent="Players" instance=ExtResource("3_0ieph")]
-position = Vector2(263, -20.0017)
+position = Vector2(-223, 33.0001)
 
 [node name="RightOffensiveTackle" parent="Players" instance=ExtResource("4_fgsa7")]
-position = Vector2(308, -25.0018)
+position = Vector2(-175, 27.9999)
 
 [node name="LeftOffensiveGuard" parent="Players" instance=ExtResource("5_0u7co")]
-position = Vector2(309, -79.0018)
+position = Vector2(-175, -28.0001)
 
 [node name="LeftDefensiveTackle" parent="Players" instance=ExtResource("6_w1o02")]
-position = Vector2(265, -85.0017)
+position = Vector2(-223, -35.9999)
 
 [node name="Runningback" parent="Players" instance=ExtResource("8_xl2ct")]
-position = Vector2(366, -9.00205)
+position = Vector2(-94.9998, 39.9996)
+
+[node name="YardMarkers" type="Node2D" parent="."]
+
+[node name="0" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/0"]
+position = Vector2(0, -905)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="1" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/1"]
+position = Vector2(0, -888)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="2" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/2"]
+position = Vector2(0, -870)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="3" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/3"]
+position = Vector2(0, -852)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="4" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/4"]
+position = Vector2(0, -834)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="5" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/5"]
+position = Vector2(0, -814)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="6" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/6"]
+position = Vector2(0, -796)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="7" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/7"]
+position = Vector2(0, -777)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="8" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/8"]
+position = Vector2(0, -759)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="9" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/9"]
+position = Vector2(0, -741)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="10" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/10"]
+position = Vector2(0, -726)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="11" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/11"]
+position = Vector2(0, -707)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="12" type="Area2D" parent="YardMarkers"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/12"]
+position = Vector2(0, -688)
+shape = SubResource("RectangleShape2D_8gd3f")

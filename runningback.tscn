@@ -9,7 +9,7 @@ radius = 6.0
 radius = 8.0
 height = 34.0
 
-[node name="Runningback" type="CharacterBody2D" groups=["RB"]]
+[node name="Runningback" type="CharacterBody2D" groups=["RB", "player"]]
 script = ExtResource("1_rsyy6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

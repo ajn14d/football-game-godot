@@ -10,7 +10,7 @@ var has_ball = false
 var current_stamina = max_stamina  # Current stamina
 
 func _process(delta):
-	# Only allow control if the QB has the ball
+	# Only allow control if the RB has the ball
 	if has_ball:
 		# Handle movement input
 		var input_vector = Vector2(

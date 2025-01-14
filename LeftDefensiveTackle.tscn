@@ -15,7 +15,7 @@ gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_gy63w")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["DT", "Defense"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["DT", "Defense", "player"]]
 modulate = Color(0.721569, 0, 0.235294, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1qlis")

@@ -9,7 +9,7 @@ radius = 6.0
 radius = 4.0
 height = 22.0
 
-[node name="RightDefensiveTackle" type="RigidBody2D" groups=["DT", "Defense"]]
+[node name="RightDefensiveTackle" type="RigidBody2D" groups=["DT", "Defense", "player"]]
 collision_layer = 16
 gravity_scale = 0.0
 lock_rotation = true

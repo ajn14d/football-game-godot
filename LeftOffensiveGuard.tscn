@@ -9,7 +9,7 @@ radius = 6.0
 radius = 4.0
 height = 22.0
 
-[node name="LeftOffensiveGuard" type="RigidBody2D" groups=["OG"]]
+[node name="LeftOffensiveGuard" type="RigidBody2D" groups=["OG", "player"]]
 collision_layer = 256
 collision_mask = 0
 gravity_scale = 0.0
