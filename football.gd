@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 var has_ball = false
+var past_los = false
 @export var throw_force: float = 500  # Force applied when the football is thrown
 @onready var quarterback = get_node("/root/GameScene/Quarterback")
 @onready var running_back = get_node("/root/GameScene/Runningback")  # Reference to the RB node
@@ -46,7 +47,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 # This function handles the throwing action
 func throw_football():
 	# Ensure quarterback is not null before accessing its position
-	if quarterback != null:
+	if quarterback != null and not past_los:
 		# Get the mouse position in global coordinates
 		var mouse_position = get_global_mouse_position()
 

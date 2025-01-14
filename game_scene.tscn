@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=14 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
@@ -15,6 +15,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gd3f"]
 size = Vector2(977.258, 4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgcmy"]
+size = Vector2(486, 3.5)
+
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_68k8h")
 
@@ -23,10 +26,6 @@ z_index = -1
 position = Vector2(-59, 55.5)
 rotation = 1.5708
 texture = ExtResource("1_l4xoe")
-
-[node name="LineOfScrimmage" type="Sprite2D" parent="."]
-scale = Vector2(7.76367, 0.0380859)
-texture = ExtResource("3_a46nc")
 
 [node name="Football" parent="." instance=ExtResource("2_wlkau")]
 position = Vector2(0, -75)
@@ -872,5 +871,19 @@ shape = SubResource("RectangleShape2D_8gd3f")
 [node name="PauseNode" type="Node" parent="."]
 process_mode = 2
 script = ExtResource("11_ktj17")
+
+[node name="LineOfScrimmage" type="Area2D" parent="." groups=["LOS"]]
+
+[node name="LOSart" type="Sprite2D" parent="LineOfScrimmage"]
+scale = Vector2(7.76367, 0.0380859)
+texture = ExtResource("3_a46nc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LineOfScrimmage" groups=["LOS"]]
+position = Vector2(-253, 0.25)
+shape = SubResource("RectangleShape2D_tgcmy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LineOfScrimmage" groups=["LOS"]]
+position = Vector2(252, 0)
+shape = SubResource("RectangleShape2D_tgcmy")
 
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]

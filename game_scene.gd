@@ -93,6 +93,8 @@ func start_new_play() -> void:
 # Function to reset players' positions to pre-play positions
 func pre_play() -> void:
 	
+	football.past_los = false
+	
 	# remove ball from player
 	quarterback.has_ball = false 
 	runningback.has_ball = false
@@ -116,13 +118,13 @@ func pre_play() -> void:
 	football.position = line_of_scrimmage
 
 	# Print the new positions to check
-	print("Quarterback's position after reset: ", quarterback.position)
-	print("Runningback's position after reset: ", runningback.position)
-	print("Right Defensive Tackle's position after reset: ", right_defensive_tackle.position)
-	print("Left Defensive Tackle's position after reset: ", left_defensive_tackle.position)
-	print("Right Offensive Guard's position after reset: ", right_offensive_guard.position)
-	print("Left Offensive Guard's position after reset: ", left_offensive_guard.position)
-	print("Football's position after reset: ", football.position)
+	#print("Quarterback's position after reset: ", quarterback.position)
+	#print("Runningback's position after reset: ", runningback.position)
+	#print("Right Defensive Tackle's position after reset: ", right_defensive_tackle.position)
+	#print("Left Defensive Tackle's position after reset: ", left_defensive_tackle.position)
+	#print("Right Offensive Guard's position after reset: ", right_offensive_guard.position)
+	#print("Left Offensive Guard's position after reset: ", left_offensive_guard.position)
+	#print("Football's position after reset: ", football.position)
 
 # Callback when the football's Area2D enters another Area2D
 func _on_football_area_entered(area: Area2D) -> void:
@@ -131,8 +133,11 @@ func _on_football_area_entered(area: Area2D) -> void:
 		# Check if the player has the ball (either QB or RB)
 		if quarterback.has_ball or runningback.has_ball:
 			# Only update position if the QB or RB has the ball
-			print("Football at yard marker:", area.name)
-			print("Football global position: ", football.global_position.y)
+			#print("Football at yard marker:", area.name)
+			#print("Football global position: ", football.global_position.y)
 			
 			# Update the last recorded position of the football only if QB or RB has the ball
 			last_football_position_y = football.global_position.y
+	if area.is_in_group("LOS"):
+		football.past_los = true
+		print("past the lOS")
