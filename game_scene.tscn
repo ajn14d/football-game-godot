@@ -28,28 +28,35 @@ scale = Vector2(7.76367, 0.0380859)
 texture = ExtResource("3_a46nc")
 
 [node name="Football" parent="." instance=ExtResource("2_wlkau")]
+position = Vector2(0, -75)
 gravity_scale = 0.0
+
+[node name="Quarterback" parent="." instance=ExtResource("2_mgcvx")]
+rotation = 1.5708
+motion_mode = 1
+
+[node name="Runningback" parent="." instance=ExtResource("8_xl2ct")]
+position = Vector2(-68, -2.0187e-06)
+rotation = 1.5708
+
+[node name="RightDefensiveTackle" parent="." instance=ExtResource("3_0ieph")]
+position = Vector2(-39, -99)
+rotation = 1.5708
+
+[node name="RightOffensiveGuard" parent="." instance=ExtResource("4_fgsa7")]
+position = Vector2(-30, -56)
+rotation = 1.5708
+
+[node name="LeftOffensiveGuard" parent="." instance=ExtResource("5_0u7co")]
+position = Vector2(32, -58)
+rotation = 1.5708
+
+[node name="LeftDefensiveTackle" parent="." instance=ExtResource("6_w1o02")]
+position = Vector2(41, -99)
+rotation = 1.5708
 
 [node name="Players" type="Node2D" parent="."]
 rotation = 1.5708
-
-[node name="RightDefensiveTackle" parent="Players" instance=ExtResource("3_0ieph")]
-position = Vector2(-98.9999, 39.0004)
-
-[node name="RightOffensiveTackle" parent="Players" instance=ExtResource("4_fgsa7")]
-position = Vector2(-55.9999, 30.0002)
-
-[node name="LeftOffensiveGuard" parent="Players" instance=ExtResource("5_0u7co")]
-position = Vector2(-58.0001, -31.9998)
-
-[node name="LeftDefensiveTackle" parent="Players" instance=ExtResource("6_w1o02")]
-position = Vector2(-99.0002, -40.9996)
-
-[node name="Runningback" parent="Players" instance=ExtResource("8_xl2ct")]
-position = Vector2(0.000244141, 68)
-
-[node name="Quarterback" parent="Players" instance=ExtResource("2_mgcvx")]
-motion_mode = 1
 
 [node name="YardMarkers" type="Node2D" parent="." groups=["yard"]]
 visible = false
