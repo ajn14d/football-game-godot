@@ -3,6 +3,8 @@ extends Node2D
 var play_ended: bool = false  # Tracks whether the play has ended
 var football: RigidBody2D  # Reference to the football node
 
+var snap_speed = 200
+
 # Define the position for the line of scrimmage
 var line_of_scrimmage: Vector2 = Vector2(0, 544)
 var last_football_position_y: float = 0.0  # Store the last position of the football's Y
@@ -29,8 +31,9 @@ func _ready() -> void:
 	# Connect the signal for the football's Area2D using Callable
 	football_area.connect("area_entered", Callable(self, "_on_football_area_entered"))
 	
-	# Set the football position to the line of scrimmage
+	# Set the football position to the line of scrimmage and snap it
 	football.position = line_of_scrimmage
+	football.linear_velocity = Vector2(0, snap_speed)
 	
 	# Set the position of the sprite to the line of scrimmage position
 	$LineOfScrimmage.position = line_of_scrimmage
@@ -71,9 +74,35 @@ func end_of_play() -> void:
 		# Reset players to pre-play positions
 		pre_play()
 
+# Function to start a new play, resetting the play_ended flag
+func start_new_play() -> void:
+	# Reset the play_ended flag to allow the next play to start
+	play_ended = false
+
+	# Reset football's velocity and position
+	football.position = line_of_scrimmage
+	football.linear_velocity = Vector2(0, snap_speed)
+
+	# Optionally, add any other logic you want to reset at the start of a new play
+	print("New play started!")
+
+	# Reset the players' positions if necessary (you can call pre_play() here again if needed)
+	# Optionally adjust any other properties at the start of the play
+	pre_play()
+
+# Function to reset players' positions to pre-play positions
 func pre_play() -> void:
+	
+	# remove ball from player
+	quarterback.has_ball = false 
+	runningback.has_ball = false
+	
+	play_ended = false
 	# Calculate the offset from the original line of scrimmage
 	var line_of_scrimmage_offset = line_of_scrimmage.y - pre_play_positions["quarterback"].y + 75
+	
+	# Reset football's velocity
+	football.linear_velocity = Vector2(0, snap_speed)
 
 	# Reset the players to their pre-play positions adjusted for the new line of scrimmage
 	quarterback.position = pre_play_positions["quarterback"] + Vector2(0, line_of_scrimmage_offset)

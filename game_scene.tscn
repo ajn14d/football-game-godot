@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=13 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://qs64brtbrrnn" path="res://LeftOffensiveGuard.tscn" id="5_0u7co"]
 [ext_resource type="PackedScene" uid="uid://14mxj3qrlha2" path="res://LeftDefensiveTackle.tscn" id="6_w1o02"]
 [ext_resource type="PackedScene" uid="uid://ymo1lx443n7x" path="res://runningback.tscn" id="8_xl2ct"]
+[ext_resource type="Script" path="res://pause_node.gd" id="11_ktj17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gd3f"]
 size = Vector2(977.258, 4)
@@ -867,5 +868,9 @@ collision_mask = 32768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-49"]
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="PauseNode" type="Node" parent="."]
+process_mode = 2
+script = ExtResource("11_ktj17")
 
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]
