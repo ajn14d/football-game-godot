@@ -71,24 +71,10 @@ func end_of_play() -> void:
 		$LineOfScrimmage.position = line_of_scrimmage
 		print("New Line of Scrimmage Y Position: ", line_of_scrimmage.y)
 		
+		football.linear_velocity = Vector2(0, 0)
+		
 		# Reset players to pre-play positions
 		pre_play()
-
-# Function to start a new play, resetting the play_ended flag
-func start_new_play() -> void:
-	# Reset the play_ended flag to allow the next play to start
-	play_ended = false
-
-	# Reset football's velocity and position
-	football.position = line_of_scrimmage
-	football.linear_velocity = Vector2(0, snap_speed)
-
-	# Optionally, add any other logic you want to reset at the start of a new play
-	print("New play started!")
-
-	# Reset the players' positions if necessary (you can call pre_play() here again if needed)
-	# Optionally adjust any other properties at the start of the play
-	pre_play()
 
 # Function to reset players' positions to pre-play positions
 func pre_play() -> void:
@@ -103,7 +89,10 @@ func pre_play() -> void:
 	# Calculate the offset from the original line of scrimmage
 	var line_of_scrimmage_offset = line_of_scrimmage.y - pre_play_positions["quarterback"].y + 75
 	
-	# Reset football's velocity
+	# Set the football position to the line of scrimmage
+	football.position = line_of_scrimmage
+	
+	# Snap football to QB
 	football.linear_velocity = Vector2(0, snap_speed)
 
 	# Reset the players to their pre-play positions adjusted for the new line of scrimmage
@@ -113,9 +102,6 @@ func pre_play() -> void:
 	left_defensive_tackle.position = pre_play_positions["left_defensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
 	right_offensive_guard.position = pre_play_positions["right_offensive_guard"] + Vector2(0, line_of_scrimmage_offset)
 	left_offensive_guard.position = pre_play_positions["left_offensive_guard"] + Vector2(0, line_of_scrimmage_offset)
-
-	# Set the football position to the line of scrimmage
-	football.position = line_of_scrimmage
 
 	# Print the new positions to check
 	#print("Quarterback's position after reset: ", quarterback.position)
