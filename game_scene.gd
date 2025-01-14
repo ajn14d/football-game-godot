@@ -17,8 +17,12 @@ var pre_play_positions: Dictionary = {}
 @onready var runningback = $Runningback
 @onready var right_defensive_tackle = $RightDefensiveTackle
 @onready var left_defensive_tackle = $LeftDefensiveTackle
+@onready var right_defensive_end = $RightDefensiveEnd
+@onready var left_defensive_end = $LeftDefensiveEnd
 @onready var right_offensive_guard = $RightOffensiveGuard
 @onready var left_offensive_guard = $LeftOffensiveGuard
+@onready var right_offensive_tackle = $RightOffensiveTackle
+@onready var left_offensive_tackle = $LeftOffensiveTackle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,21 +42,29 @@ func _ready() -> void:
 	# Set the position of the sprite to the line of scrimmage position
 	$LineOfScrimmage.position = line_of_scrimmage
 	
-	# Position the players relative to the line of scrimmage
+# Position the players relative to the line of scrimmage
 	quarterback.position = line_of_scrimmage + Vector2(0, 75)  # QB position
 	runningback.position = line_of_scrimmage + Vector2(-50, 75)  # RB position
 	right_defensive_tackle.position = line_of_scrimmage + Vector2(-30, -15)  # Right Defensive Tackle
 	left_defensive_tackle.position = line_of_scrimmage + Vector2(30, -15)  # Left Defensive Tackle
+	right_defensive_end.position = line_of_scrimmage + Vector2(-60, -15)  # Right Defensive End
+	left_defensive_end.position = line_of_scrimmage + Vector2(60, -15)  # Left Defensive End
 	right_offensive_guard.position = line_of_scrimmage + Vector2(25, 15)  # Right Offensive Guard
 	left_offensive_guard.position = line_of_scrimmage + Vector2(-25, 15)  # Left Offensive Guard
+	right_offensive_tackle.position = line_of_scrimmage + Vector2(50, 15)  # Right Offensive Tackle
+	left_offensive_tackle.position = line_of_scrimmage + Vector2(-50, 15)  # Left Offensive Tackle
 	
 	# Save the pre-play position of the players
 	pre_play_positions["quarterback"] = quarterback.position
 	pre_play_positions["runningback"] = runningback.position
 	pre_play_positions["right_defensive_tackle"] = right_defensive_tackle.position
 	pre_play_positions["left_defensive_tackle"] = left_defensive_tackle.position
+	pre_play_positions["right_defensive_end"] = right_defensive_end.position
+	pre_play_positions["left_defensive_end"] = left_defensive_end.position
 	pre_play_positions["right_offensive_guard"] = right_offensive_guard.position
 	pre_play_positions["left_offensive_guard"] = left_offensive_guard.position
+	pre_play_positions["right_offensive_tackle"] = right_offensive_tackle.position
+	pre_play_positions["left_offensive_tackle"] = left_offensive_tackle.position
 
 # Handle input to trigger the end_of_play function
 func _input(event: InputEvent) -> void:
@@ -98,10 +110,14 @@ func pre_play() -> void:
 	# Reset the players to their pre-play positions adjusted for the new line of scrimmage
 	quarterback.position = pre_play_positions["quarterback"] + Vector2(0, line_of_scrimmage_offset)
 	runningback.position = pre_play_positions["runningback"] + Vector2(0, line_of_scrimmage_offset)
+	right_defensive_end.position = pre_play_positions["right_defensive_end"] + Vector2(0, line_of_scrimmage_offset)
 	right_defensive_tackle.position = pre_play_positions["right_defensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
+	left_defensive_end.position = pre_play_positions["left_defensive_end"] + Vector2(0, line_of_scrimmage_offset)
 	left_defensive_tackle.position = pre_play_positions["left_defensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
 	right_offensive_guard.position = pre_play_positions["right_offensive_guard"] + Vector2(0, line_of_scrimmage_offset)
+	right_offensive_tackle.position = pre_play_positions["right_offensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
 	left_offensive_guard.position = pre_play_positions["left_offensive_guard"] + Vector2(0, line_of_scrimmage_offset)
+	left_offensive_tackle.position = pre_play_positions["left_offensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
 
 	# Print the new positions to check
 	#print("Quarterback's position after reset: ", quarterback.position)

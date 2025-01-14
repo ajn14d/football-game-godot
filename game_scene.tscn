@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=18 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
@@ -8,9 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://seesdvb36s7y" path="res://art/icon.svg" id="3_a46nc"]
 [ext_resource type="PackedScene" uid="uid://fxc5vr6kjebj" path="res://RightOffensiveGuard.tscn" id="4_fgsa7"]
 [ext_resource type="PackedScene" uid="uid://qs64brtbrrnn" path="res://LeftOffensiveGuard.tscn" id="5_0u7co"]
+[ext_resource type="PackedScene" uid="uid://ladsef7gwlnq" path="res://RightDefensiveEnd.tscn" id="6_ahh3r"]
 [ext_resource type="PackedScene" uid="uid://14mxj3qrlha2" path="res://LeftDefensiveTackle.tscn" id="6_w1o02"]
 [ext_resource type="PackedScene" uid="uid://ymo1lx443n7x" path="res://runningback.tscn" id="8_xl2ct"]
+[ext_resource type="PackedScene" uid="uid://de481hrstp4dn" path="res://LeftDefensiveEnd.tscn" id="9_608pk"]
+[ext_resource type="PackedScene" uid="uid://drm181teboe0p" path="res://RightOffensiveTackle.tscn" id="9_o06mk"]
 [ext_resource type="Script" path="res://pause_node.gd" id="11_ktj17"]
+[ext_resource type="PackedScene" uid="uid://7x13yigbeakk" path="res://LeftOffensiveTackle.tscn" id="12_4lwmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gd3f"]
 size = Vector2(977.258, 4)
@@ -39,6 +43,8 @@ motion_mode = 1
 position = Vector2(-68, -2.0187e-06)
 rotation = 1.5708
 
+[node name="RightDefensiveEnd" parent="." instance=ExtResource("6_ahh3r")]
+
 [node name="RightDefensiveTackle" parent="." instance=ExtResource("3_0ieph")]
 position = Vector2(-39, -99)
 rotation = 1.5708
@@ -47,9 +53,15 @@ rotation = 1.5708
 position = Vector2(-30, -56)
 rotation = 1.5708
 
+[node name="RightOffensiveTackle" parent="." instance=ExtResource("9_o06mk")]
+
+[node name="LeftDefensiveEnd" parent="." instance=ExtResource("9_608pk")]
+
 [node name="LeftOffensiveGuard" parent="." instance=ExtResource("5_0u7co")]
 position = Vector2(32, -58)
 rotation = 1.5708
+
+[node name="LeftOffensiveTackle" parent="." instance=ExtResource("12_4lwmh")]
 
 [node name="LeftDefensiveTackle" parent="." instance=ExtResource("6_w1o02")]
 position = Vector2(41, -99)
