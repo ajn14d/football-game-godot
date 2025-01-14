@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=12 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
 [ext_resource type="PackedScene" uid="uid://bt36fs0g4lueb" path="res://quarterback.tscn" id="2_mgcvx"]
 [ext_resource type="PackedScene" uid="uid://bijo5ficuekdb" path="res://football.tscn" id="2_wlkau"]
 [ext_resource type="PackedScene" uid="uid://d3di2a3a5tct5" path="res://RightDefensiveTackle.tscn" id="3_0ieph"]
+[ext_resource type="Texture2D" uid="uid://seesdvb36s7y" path="res://art/icon.svg" id="3_a46nc"]
 [ext_resource type="PackedScene" uid="uid://fxc5vr6kjebj" path="res://RightOffensiveGuard.tscn" id="4_fgsa7"]
 [ext_resource type="PackedScene" uid="uid://qs64brtbrrnn" path="res://LeftOffensiveGuard.tscn" id="5_0u7co"]
 [ext_resource type="PackedScene" uid="uid://14mxj3qrlha2" path="res://LeftDefensiveTackle.tscn" id="6_w1o02"]
@@ -18,111 +19,846 @@ script = ExtResource("1_68k8h")
 
 [node name="FieldArt" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(-59, 56)
+position = Vector2(-59, 55.5)
 rotation = 1.5708
 texture = ExtResource("1_l4xoe")
+
+[node name="LineOfScrimmage" type="Sprite2D" parent="."]
+scale = Vector2(7.76367, 0.0380859)
+texture = ExtResource("3_a46nc")
 
 [node name="Football" parent="." instance=ExtResource("2_wlkau")]
 gravity_scale = 0.0
 
 [node name="Players" type="Node2D" parent="."]
-position = Vector2(-0.000723998, 200)
 rotation = 1.5708
 
-[node name="Quarterback" parent="Players" instance=ExtResource("2_mgcvx")]
-position = Vector2(-112, -1.00032)
-
 [node name="RightDefensiveTackle" parent="Players" instance=ExtResource("3_0ieph")]
-position = Vector2(-223, 33.0001)
+position = Vector2(-98.9999, 39.0004)
 
 [node name="RightOffensiveTackle" parent="Players" instance=ExtResource("4_fgsa7")]
-position = Vector2(-175, 27.9999)
+position = Vector2(-55.9999, 30.0002)
 
 [node name="LeftOffensiveGuard" parent="Players" instance=ExtResource("5_0u7co")]
-position = Vector2(-175, -28.0001)
+position = Vector2(-58.0001, -31.9998)
 
 [node name="LeftDefensiveTackle" parent="Players" instance=ExtResource("6_w1o02")]
-position = Vector2(-223, -35.9999)
+position = Vector2(-99.0002, -40.9996)
 
 [node name="Runningback" parent="Players" instance=ExtResource("8_xl2ct")]
-position = Vector2(-94.9998, 39.9996)
+position = Vector2(0.000244141, 68)
 
-[node name="YardMarkers" type="Node2D" parent="."]
+[node name="Quarterback" parent="Players" instance=ExtResource("2_mgcvx")]
+motion_mode = 1
 
-[node name="0" type="Area2D" parent="YardMarkers"]
+[node name="YardMarkers" type="Node2D" parent="." groups=["yard"]]
+visible = false
+
+[node name="0" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/0"]
 position = Vector2(0, -905)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="1" type="Area2D" parent="YardMarkers"]
+[node name="1" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/1"]
 position = Vector2(0, -888)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="2" type="Area2D" parent="YardMarkers"]
+[node name="2" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/2"]
 position = Vector2(0, -870)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="3" type="Area2D" parent="YardMarkers"]
+[node name="3" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/3"]
 position = Vector2(0, -852)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="4" type="Area2D" parent="YardMarkers"]
+[node name="4" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/4"]
 position = Vector2(0, -834)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="5" type="Area2D" parent="YardMarkers"]
+[node name="5" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/5"]
 position = Vector2(0, -814)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="6" type="Area2D" parent="YardMarkers"]
+[node name="6" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/6"]
 position = Vector2(0, -796)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="7" type="Area2D" parent="YardMarkers"]
+[node name="7" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/7"]
 position = Vector2(0, -777)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="8" type="Area2D" parent="YardMarkers"]
+[node name="8" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/8"]
 position = Vector2(0, -759)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="9" type="Area2D" parent="YardMarkers"]
+[node name="9" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/9"]
 position = Vector2(0, -741)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="10" type="Area2D" parent="YardMarkers"]
+[node name="10" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/10"]
-position = Vector2(0, -726)
+position = Vector2(0, -725)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="11" type="Area2D" parent="YardMarkers"]
+[node name="11" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/11"]
 position = Vector2(0, -707)
 shape = SubResource("RectangleShape2D_8gd3f")
 
-[node name="12" type="Area2D" parent="YardMarkers"]
+[node name="12" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/12"]
 position = Vector2(0, -688)
 shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="13" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/13"]
+position = Vector2(0, -670)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="14" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/14"]
+position = Vector2(0, -652)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="15" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/15"]
+position = Vector2(0, -633)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="16" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/16"]
+position = Vector2(0, -614)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="17" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/17"]
+position = Vector2(0, -596)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="18" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/18"]
+position = Vector2(0, -578)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="19" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/19"]
+position = Vector2(0, -560)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="20" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/20"]
+position = Vector2(0, -544)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="21" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/21"]
+position = Vector2(0, -525)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="22" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/22"]
+position = Vector2(0, -507)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="23" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/23"]
+position = Vector2(0, -489)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="24" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/24"]
+position = Vector2(0, -471)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="25" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/25"]
+position = Vector2(0, -451)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="26" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/26"]
+position = Vector2(0, -433)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="27" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/27"]
+position = Vector2(0, -414)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="28" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/28"]
+position = Vector2(0, -396)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="29" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/29"]
+position = Vector2(0, -378)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="30" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/30"]
+position = Vector2(0, -362)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="31" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/31"]
+position = Vector2(0, -344)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="32" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/32"]
+position = Vector2(0, -326)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="33" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/33"]
+position = Vector2(0, -308)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="34" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/34"]
+position = Vector2(0, -290)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="35" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/35"]
+position = Vector2(0, -270)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="36" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/36"]
+position = Vector2(0, -251)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="37" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/37"]
+position = Vector2(0, -234)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="38" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/38"]
+position = Vector2(0, -215)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="39" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/39"]
+position = Vector2(0, -197)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="40" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/40"]
+position = Vector2(0, -181)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="41" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/41"]
+position = Vector2(0, -163)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="42" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/42"]
+position = Vector2(0, -144)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="43" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/43"]
+position = Vector2(0, -126)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="44" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/44"]
+position = Vector2(0, -108)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="45" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/45"]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="46" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/46"]
+position = Vector2(1, -70)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="47" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/47"]
+position = Vector2(0, -52)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="48" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/48"]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="49" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/49"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="50" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/50"]
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-0" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-0"]
+position = Vector2(0, 905)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-1" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-1"]
+position = Vector2(0, 888)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-2" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-2"]
+position = Vector2(0, 870)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-3" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-3"]
+position = Vector2(0, 852)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-4" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-4"]
+position = Vector2(0, 834)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-5" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-5"]
+position = Vector2(0, 818)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-6" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-6"]
+position = Vector2(0, 795)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-7" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-7"]
+position = Vector2(0, 777)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-8" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-8"]
+position = Vector2(0, 759)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-9" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-9"]
+position = Vector2(0, 741)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-10" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-10"]
+position = Vector2(0, 725)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-11" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-11"]
+position = Vector2(0, 707)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-12" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-12"]
+position = Vector2(0, 688)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-13" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-13"]
+position = Vector2(0, 670)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-14" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-14"]
+position = Vector2(0, 652)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-15" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-15"]
+position = Vector2(0, 636)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-16" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-16"]
+position = Vector2(0, 614)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-17" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-17"]
+position = Vector2(0, 596)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-18" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-18"]
+position = Vector2(0, 578)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-19" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-19"]
+position = Vector2(0, 560)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-20" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-20"]
+position = Vector2(0, 544)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-21" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-21"]
+position = Vector2(0, 525)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-22" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-22"]
+position = Vector2(0, 507)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-23" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-23"]
+position = Vector2(0, 489)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-24" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-24"]
+position = Vector2(0, 471)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-25" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-25"]
+position = Vector2(0, 455)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-26" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-26"]
+position = Vector2(0, 433)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-27" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-27"]
+position = Vector2(0, 414)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-28" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-28"]
+position = Vector2(0, 396)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-29" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-29"]
+position = Vector2(0, 378)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-30" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-30"]
+position = Vector2(0, 362)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-31" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-31"]
+position = Vector2(0, 344)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-32" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-32"]
+position = Vector2(0, 326)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-33" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-33"]
+position = Vector2(0, 307)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-34" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-34"]
+position = Vector2(0, 289)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-35" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-35"]
+position = Vector2(0, 274)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-36" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-36"]
+position = Vector2(0, 251)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-37" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-37"]
+position = Vector2(0, 233)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-38" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-38"]
+position = Vector2(0, 215)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-39" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-39"]
+position = Vector2(0, 197)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-40" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-40"]
+position = Vector2(0, 181)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-41" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-41"]
+position = Vector2(0, 162)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-42" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-42"]
+position = Vector2(0, 144)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-43" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-43"]
+position = Vector2(0, 126)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-44" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-44"]
+position = Vector2(0, 108)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-45" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-45"]
+position = Vector2(0, 92)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-46" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-46"]
+position = Vector2(0, 70)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-47" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-47"]
+position = Vector2(0, 52)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-48" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-48"]
+position = Vector2(0, 34)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[node name="-49" type="Area2D" parent="YardMarkers" groups=["yard"]]
+collision_layer = 2048
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YardMarkers/-49"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_8gd3f")
+
+[connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]

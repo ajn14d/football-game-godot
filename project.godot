@@ -25,6 +25,7 @@ football=""
 RB=""
 player=""
 defense=""
+yard=""
 
 [input]
 
@@ -82,4 +83,5 @@ new_play={
 2d_physics/layer_4="OT"
 2d_physics/layer_5="DT"
 2d_physics/layer_9="OG"
+2d_physics/layer_12="yards"
 2d_physics/layer_16="football"

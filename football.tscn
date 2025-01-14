@@ -13,7 +13,7 @@ height = 16.0
 
 [node name="Football" type="RigidBody2D" groups=["football"]]
 collision_layer = 32768
-collision_mask = 0
+collision_mask = 2048
 script = ExtResource("1_i3dig")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,6 +26,8 @@ scale = Vector2(0.388889, 0.4375)
 texture = ExtResource("1_d1ynf")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 2055
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 modulate = Color(1, 1, 1, 0.231373)
