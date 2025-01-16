@@ -34,6 +34,6 @@ modulate = Color(1, 1, 1, 0.231373)
 shape = SubResource("CapsuleShape2D_t6k8y")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(-7, 0)
+offset = Vector2(0, -150)
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

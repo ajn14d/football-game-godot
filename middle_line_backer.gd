@@ -51,13 +51,13 @@ func blocked():
 
 # Function to handle detection event when OG enters the area
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("OT"):
+	if body.is_in_group("C"):
 		#print("OG detected")
 		blocked()  # Stop movement when OG is detected
 
 # Function to handle detection event when OG exits the area
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("OT"):
+	if body.is_in_group("C"):
 		#print("OG exited, resuming pursuit")
 		is_blocked = false  # Reset the flag to allow pursuit again
 		block_timer.stop()  # Stop the timer when no longer blocked

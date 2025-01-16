@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8kp8ngskgxnc"]
+
+[ext_resource type="Script" path="res://wide_receiver_2.gd" id="1_luv16"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qlis"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awt21"]
+radius = 8.0
+height = 34.0
+
+[node name="WideReceiver2" type="CharacterBody2D" groups=["WR", "player"]]
+rotation = 1.5708
+script = ExtResource("1_luv16")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.424816, 0.459876, 1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1qlis")
+
+[node name="DetectionArea" type="Area2D" parent="." groups=["RB"]]
+collision_layer = 131076
+collision_mask = 32816
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+modulate = Color(1, 1, 1, 0.309804)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_awt21")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

@@ -15,6 +15,11 @@ var pre_play_positions: Dictionary = {}
 @onready var players = $Players
 @onready var quarterback = $Quarterback
 @onready var runningback = $Runningback
+@onready var wide_receiver_1 = $WideReceiver1
+@onready var wide_receiver_2 = $WideReceiver2
+@onready var wide_receiver_3 = $WideReceiver3
+@onready var wide_receiver_4 = $WideReceiver4
+@onready var middle_linebacker = $MiddleLineBacker
 @onready var right_defensive_tackle = $RightDefensiveTackle
 @onready var left_defensive_tackle = $LeftDefensiveTackle
 @onready var right_defensive_end = $RightDefensiveEnd
@@ -23,6 +28,7 @@ var pre_play_positions: Dictionary = {}
 @onready var left_offensive_guard = $LeftOffensiveGuard
 @onready var right_offensive_tackle = $RightOffensiveTackle
 @onready var left_offensive_tackle = $LeftOffensiveTackle
+@onready var center = $Center
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,9 +48,14 @@ func _ready() -> void:
 	# Set the position of the sprite to the line of scrimmage position
 	$LineOfScrimmage.position = line_of_scrimmage
 	
-# Position the players relative to the line of scrimmage
+	# Position the players relative to the line of scrimmage
 	quarterback.position = line_of_scrimmage + Vector2(0, 75)  # QB position
 	runningback.position = line_of_scrimmage + Vector2(-50, 75)  # RB position
+	wide_receiver_1.position = line_of_scrimmage + Vector2(200, 15)  # Wide Receiver 1 position
+	wide_receiver_2.position = line_of_scrimmage + Vector2(-200, 15)  # Wide Receiver 1 position
+	wide_receiver_3.position = line_of_scrimmage + Vector2(400, 15)  # Wide Receiver 1 position
+	wide_receiver_4.position = line_of_scrimmage + Vector2(-400, 15)  # Wide Receiver 1 position
+	middle_linebacker.position = line_of_scrimmage + Vector2(0, -75)  # Wide Receiver 1 position
 	right_defensive_tackle.position = line_of_scrimmage + Vector2(-30, -15)  # Right Defensive Tackle
 	left_defensive_tackle.position = line_of_scrimmage + Vector2(30, -15)  # Left Defensive Tackle
 	right_defensive_end.position = line_of_scrimmage + Vector2(-60, -15)  # Right Defensive End
@@ -52,11 +63,17 @@ func _ready() -> void:
 	right_offensive_guard.position = line_of_scrimmage + Vector2(25, 15)  # Right Offensive Guard
 	left_offensive_guard.position = line_of_scrimmage + Vector2(-25, 15)  # Left Offensive Guard
 	right_offensive_tackle.position = line_of_scrimmage + Vector2(50, 15)  # Right Offensive Tackle
-	left_offensive_tackle.position = line_of_scrimmage + Vector2(-50, 15)  # Left Offensive Tackle
+	left_offensive_tackle.position = line_of_scrimmage + Vector2(-50, 15)  # Left Offensive Tacklee
+	center.position = line_of_scrimmage + Vector2(0, 15)  # Wide Receiver 1 position
 	
 	# Save the pre-play position of the players
 	pre_play_positions["quarterback"] = quarterback.position
 	pre_play_positions["runningback"] = runningback.position
+	pre_play_positions["wide_receiver_1"] = wide_receiver_1.position
+	pre_play_positions["wide_receiver_2"] = wide_receiver_2.position
+	pre_play_positions["wide_receiver_3"] = wide_receiver_3.position
+	pre_play_positions["wide_receiver_4"] = wide_receiver_4.position
+	pre_play_positions["middle_linebacker"] = middle_linebacker.position
 	pre_play_positions["right_defensive_tackle"] = right_defensive_tackle.position
 	pre_play_positions["left_defensive_tackle"] = left_defensive_tackle.position
 	pre_play_positions["right_defensive_end"] = right_defensive_end.position
@@ -65,6 +82,7 @@ func _ready() -> void:
 	pre_play_positions["left_offensive_guard"] = left_offensive_guard.position
 	pre_play_positions["right_offensive_tackle"] = right_offensive_tackle.position
 	pre_play_positions["left_offensive_tackle"] = left_offensive_tackle.position
+	pre_play_positions["center"] = center.position
 
 # Handle input to trigger the end_of_play function
 func _input(event: InputEvent) -> void:
@@ -93,9 +111,13 @@ func pre_play() -> void:
 	
 	football.past_los = false
 	
-	# remove ball from player
+	# Remove the ball from all potential ball carriers
 	quarterback.has_ball = false 
 	runningback.has_ball = false
+	wide_receiver_1.has_ball = false
+	wide_receiver_2.has_ball = false
+	wide_receiver_3.has_ball = false
+	wide_receiver_4.has_ball = false
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage
@@ -110,6 +132,11 @@ func pre_play() -> void:
 	# Reset the players to their pre-play positions adjusted for the new line of scrimmage
 	quarterback.position = pre_play_positions["quarterback"] + Vector2(0, line_of_scrimmage_offset)
 	runningback.position = pre_play_positions["runningback"] + Vector2(0, line_of_scrimmage_offset)
+	wide_receiver_1.position = pre_play_positions["wide_receiver_1"] + Vector2(0, line_of_scrimmage_offset)
+	wide_receiver_2.position = pre_play_positions["wide_receiver_2"] + Vector2(0, line_of_scrimmage_offset)
+	wide_receiver_3.position = pre_play_positions["wide_receiver_3"] + Vector2(0, line_of_scrimmage_offset)
+	wide_receiver_4.position = pre_play_positions["wide_receiver_4"] + Vector2(0, line_of_scrimmage_offset)
+	middle_linebacker.position = pre_play_positions["middle_linebacker"] + Vector2(0, line_of_scrimmage_offset)
 	right_defensive_end.position = pre_play_positions["right_defensive_end"] + Vector2(0, line_of_scrimmage_offset)
 	right_defensive_tackle.position = pre_play_positions["right_defensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
 	left_defensive_end.position = pre_play_positions["left_defensive_end"] + Vector2(0, line_of_scrimmage_offset)
@@ -118,6 +145,7 @@ func pre_play() -> void:
 	right_offensive_tackle.position = pre_play_positions["right_offensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
 	left_offensive_guard.position = pre_play_positions["left_offensive_guard"] + Vector2(0, line_of_scrimmage_offset)
 	left_offensive_tackle.position = pre_play_positions["left_offensive_tackle"] + Vector2(0, line_of_scrimmage_offset)
+	center.position = pre_play_positions["center"] + Vector2(0, line_of_scrimmage_offset)
 
 	# Print the new positions to check
 	#print("Quarterback's position after reset: ", quarterback.position)
@@ -133,7 +161,7 @@ func _on_football_area_entered(area: Area2D) -> void:
 	# Check if the area is in the "yard" group
 	if area.is_in_group("yard"):
 		# Check if the player has the ball (either QB or RB)
-		if quarterback.has_ball or runningback.has_ball:
+		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
 			# Only update position if the QB or RB has the ball
 			#print("Football at yard marker:", area.name)
 			#print("Football global position: ", football.global_position.y)

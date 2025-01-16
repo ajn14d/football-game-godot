@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @export var speed = 40  # Speed at which the tackle chases the QB
+var blocked_speed = 3
 
 # Reference to the Football node
 var football: Node2D
@@ -38,10 +39,13 @@ func pursue():
 	# Set the RDT's velocity directly
 	linear_velocity = direction_to_football * speed
 
-# Function to stop movement (called during a block)
+# Function to reduce movement (called during a block)
 func blocked():
-	# Stop all movement
-	linear_velocity = Vector2.ZERO
+	# Calculate direction to the QB
+	var direction_to_football = (football.global_position - global_position).normalized()
+	
+	# reduce movement
+	linear_velocity = direction_to_football * blocked_speed
 	is_blocked = true  # Set the flag to indicate the block
 	block_timer.start()  # Start the timer to attempt breaking the block
 

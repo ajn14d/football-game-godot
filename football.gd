@@ -5,6 +5,10 @@ var past_los = false
 @export var throw_force: float = 500  # Force applied when the football is thrown
 @onready var quarterback = get_node("/root/GameScene/Quarterback")
 @onready var running_back = get_node("/root/GameScene/Runningback")  # Reference to the RB node
+@onready var wide_receiver_1 = get_node("/root/GameScene/WideReceiver1")
+@onready var wide_receiver_2 = get_node("/root/GameScene/WideReceiver2")
+@onready var wide_receiver_3 = get_node("/root/GameScene/WideReceiver3")
+@onready var wide_receiver_4 = get_node("/root/GameScene/WideReceiver4")
 @export var offset: Vector2 = Vector2(7, 0)  # Offset for the football (to the right of the QB or RB)
 
 func _ready() -> void:
@@ -28,10 +32,31 @@ func _process(delta: float) -> void:
 			
 			# Set the football's position based on player's position and the rotated offset
 			position = player.global_position + rotated_offset
+			
 	elif running_back != null and running_back.has_ball:
 		# If the RB has the ball, update the football's position to be with the RB
 		var rotated_offset = offset.rotated(running_back.rotation)
 		position = running_back.global_position + rotated_offset
+	
+	elif wide_receiver_1 != null and wide_receiver_1.has_ball:
+		# If the RB has the ball, update the football's position to be with the RB
+		var rotated_offset = offset.rotated(wide_receiver_1.rotation)
+		position = wide_receiver_1.global_position + rotated_offset
+	
+	elif wide_receiver_2 != null and wide_receiver_2.has_ball:
+		# If the RB has the ball, update the football's position to be with the RB
+		var rotated_offset = offset.rotated(wide_receiver_2.rotation)
+		position = wide_receiver_2.global_position + rotated_offset
+		
+	elif wide_receiver_3 != null and wide_receiver_3.has_ball:
+		# If the RB has the ball, update the football's position to be with the RB
+		var rotated_offset = offset.rotated(wide_receiver_3.rotation)
+		position = wide_receiver_3.global_position + rotated_offset
+	
+	elif wide_receiver_4 != null and wide_receiver_4.has_ball:
+		# If the RB has the ball, update the football's position to be with the RB
+		var rotated_offset = offset.rotated(wide_receiver_4.rotation)
+		position = wide_receiver_4.global_position + rotated_offset
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("QB"):
@@ -42,6 +67,11 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 		has_ball = true  # Set the attachment flag for RB
 		running_back = body  # Reference the RB node
 		running_back.has_ball = true  # Mark the RB as having the ball
+		linear_velocity = Vector2.ZERO  # Stop the ball's movement
+	elif body.is_in_group("WR"):
+		has_ball = true  # Set the attachment flag for RB
+		wide_receiver_1 = body  # Reference the RB node
+		wide_receiver_1.has_ball = true  # Mark the RB as having the ball
 		linear_velocity = Vector2.ZERO  # Stop the ball's movement
 
 # This function handles the throwing action
@@ -59,6 +89,10 @@ func throw_football():
 		has_ball = false
 		quarterback = null  # Unset QB reference
 		running_back = null  # Unset RB reference
+		wide_receiver_1 = null # Unset WR reference
+		wide_receiver_2 = null # Unset WR reference
+		wide_receiver_3 = null # Unset WR reference
+		wide_receiver_4 = null # Unset WR reference
 
 		# Apply an initial velocity in the direction of the mouse position
 		linear_velocity = direction * throw_force  # Apply the throw force

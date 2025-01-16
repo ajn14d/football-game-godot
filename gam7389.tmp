@@ -63,7 +63,6 @@ position = Vector2(-385, -70)
 
 [node name="Center" parent="." instance=ExtResource("10_jc5mg")]
 position = Vector2(1, -64)
-speed = 30
 
 [node name="MiddleLineBacker" parent="." instance=ExtResource("10_2m3lu")]
 position = Vector2(1, -136)
