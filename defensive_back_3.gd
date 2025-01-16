@@ -1,10 +1,10 @@
 extends RigidBody2D
 
-@export var speed = 40  # Speed at which the tackle chases the QB
+@export var speed = 90  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 # Reference to the Football node
-var football: Node2D
+var wr3: Node2D
 
 # Flag to stop pursuing the QB
 var is_blocked = false
@@ -14,7 +14,7 @@ var block_timer: Timer
 
 func _ready():
 	# Find the football node in the scene
-	football = get_node("/root/GameScene/Football")
+	wr3 = get_node("/root/GameScene/WideReceiver3")
 	
 	# Create and configure the Timer node
 	block_timer = Timer.new()
@@ -24,28 +24,38 @@ func _ready():
 	block_timer.connect("timeout", Callable(self, "_on_try_break_block"))
 
 func _physics_process(delta):
-	if not football:
+	if not wr3:
 		return  # No football found; do nothing
 
 	# Only call pursue if RDT is not blocked
 	if not is_blocked:
 		pursue()
 
-# Function to move the RDT towards the QB
+# Function to move the RDT towards the WR
 func pursue():
-	# Calculate direction to the QB
-	var direction_to_football = (football.global_position - global_position).normalized()
-
-	# Set the RDT's velocity directly
-	linear_velocity = direction_to_football * speed
+	# Desired distance to maintain from the WR
+	var desired_distance = 35  # Adjust this value as needed
+	
+	# Calculate direction to the WR
+	var direction_to_wr3 = (wr3.global_position - global_position).normalized()
+	
+	# Calculate the current distance to the WR
+	var distance_to_wr3 = global_position.distance_to(wr3.global_position)
+	
+	# Move only if the current distance is greater than the desired distance
+	if distance_to_wr3 > desired_distance:
+		linear_velocity = direction_to_wr3 * speed
+	else:
+		# Stop moving if within the desired distance
+		linear_velocity = Vector2.ZERO
 
 # Function to reduce movement (called during a block)
 func blocked():
 	# Calculate direction to the QB
-	var direction_to_football = (football.global_position - global_position).normalized()
+	var direction_to_wr3 = (wr3.global_position - global_position).normalized()
 	
 	# reduce movement
-	linear_velocity = direction_to_football * blocked_speed
+	linear_velocity = direction_to_wr3 * blocked_speed
 	is_blocked = true  # Set the flag to indicate the block
 	block_timer.start()  # Start the timer to attempt breaking the block
 

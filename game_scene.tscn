@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=30 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
@@ -21,6 +21,12 @@
 [ext_resource type="PackedScene" uid="uid://cyms1obdw4uhg" path="res://Center.tscn" id="10_jc5mg"]
 [ext_resource type="Script" path="res://pause_node.gd" id="11_ktj17"]
 [ext_resource type="PackedScene" uid="uid://7x13yigbeakk" path="res://LeftOffensiveTackle.tscn" id="12_4lwmh"]
+[ext_resource type="PackedScene" uid="uid://b1vfbfku3tcdq" path="res://OutsideLineBacker1.tscn" id="12_j0woc"]
+[ext_resource type="PackedScene" uid="uid://clq4emu6l312j" path="res://OutsideLineBacker2.tscn" id="13_yhat5"]
+[ext_resource type="PackedScene" uid="uid://cpf0rnq0118la" path="res://DefensiveBack1.tscn" id="14_5tx6t"]
+[ext_resource type="PackedScene" uid="uid://5mp4237411r7" path="res://DefensiveBack2.tscn" id="15_78wkv"]
+[ext_resource type="PackedScene" uid="uid://c75pd3qdfpq1m" path="res://DefensiveBack3.tscn" id="16_b6p65"]
+[ext_resource type="PackedScene" uid="uid://cvsn6i6k5ab18" path="res://DefensiveBack4.tscn" id="17_wtido"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gd3f"]
 size = Vector2(977.258, 4)
@@ -63,10 +69,27 @@ position = Vector2(-385, -70)
 
 [node name="Center" parent="." instance=ExtResource("10_jc5mg")]
 position = Vector2(1, -64)
-speed = 30
 
 [node name="MiddleLineBacker" parent="." instance=ExtResource("10_2m3lu")]
 position = Vector2(1, -136)
+
+[node name="OutsideLineBacker1" parent="." instance=ExtResource("12_j0woc")]
+position = Vector2(110, -135)
+
+[node name="OutsideLineBacker2" parent="." instance=ExtResource("13_yhat5")]
+position = Vector2(-102, -134)
+
+[node name="DefensiveBack1" parent="." instance=ExtResource("14_5tx6t")]
+position = Vector2(218, -117)
+
+[node name="DefensiveBack2" parent="." instance=ExtResource("15_78wkv")]
+position = Vector2(-215, -116)
+
+[node name="DefensiveBack3" parent="." instance=ExtResource("16_b6p65")]
+position = Vector2(381, -113)
+
+[node name="DefensiveBack4" parent="." instance=ExtResource("17_wtido")]
+position = Vector2(-383, -113)
 
 [node name="RightDefensiveEnd" parent="." instance=ExtResource("6_ahh3r")]
 position = Vector2(80, -100)

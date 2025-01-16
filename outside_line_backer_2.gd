@@ -49,15 +49,15 @@ func blocked():
 	is_blocked = true  # Set the flag to indicate the block
 	block_timer.start()  # Start the timer to attempt breaking the block
 
-# Function to handle detection event when C enters the area
+# Function to handle detection event when OT enters the area
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("C"):
+	if body.is_in_group("OT"):
 		#print("OG detected")
 		blocked()  # Stop movement when OG is detected
 
-# Function to handle detection event when C exits the area
+# Function to handle detection event when OT exits the area
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("C"):
+	if body.is_in_group("OT"):
 		#print("OG exited, resuming pursuit")
 		is_blocked = false  # Reset the flag to allow pursuit again
 		block_timer.stop()  # Stop the timer when no longer blocked
