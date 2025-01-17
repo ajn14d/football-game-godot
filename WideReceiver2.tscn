@@ -11,6 +11,8 @@ height = 34.0
 
 [node name="WideReceiver2" type="CharacterBody2D" groups=["WR", "player"]]
 rotation = 1.5708
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_luv16")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
