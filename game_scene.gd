@@ -5,6 +5,8 @@ var football: RigidBody2D  # Reference to the football node
 
 var snap_speed = 200
 
+var tackled = false
+
 # Define the position for the line of scrimmage
 var line_of_scrimmage: Vector2 = Vector2(0, 544)
 var last_football_position_y: float = 0.0  # Store the last position of the football's Y
@@ -129,6 +131,9 @@ func _process(delta: float) -> void:
 		center.is_blocked = false
 		center.after_block_engage = false
 		pass_play_1()
+	if tackled:
+		end_of_play()
+		tackled = false
 
 # Handle input to trigger the end_of_play function
 func _input(event: InputEvent) -> void:
@@ -230,9 +235,12 @@ func _on_football_area_entered(area: Area2D) -> void:
 		print("past the lOS")
 	
 	if area.is_in_group("defense"):
-		pass
+		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
+			tackled = true
+		else:
+			pass
 
-#PlayBook
+#PlayBook11
 func pass_play_1() -> void:
 	if not wide_receiver_1.has_ball:
 		# Move straight north until the receiver has traveled the specified distance

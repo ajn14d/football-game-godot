@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://clq4emu6l312j"]
+[gd_scene load_steps=5 format=3 uid="uid://clq4emu6l312j"]
 
 [ext_resource type="Script" path="res://outside_line_backer_2.gd" id="1_ydd2q"]
 
@@ -8,6 +8,10 @@ radius = 6.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2jo6"]
 radius = 4.0
 height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8krx"]
+radius = 12.0
+height = 40.0
 
 [node name="OutsideLineBacker2" type="RigidBody2D" groups=["LB", "player"]]
 rotation = 1.5708
@@ -29,6 +33,15 @@ collision_mask = 33537
 modulate = Color(1, 1, 1, 0.305882)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r2jo6")
+
+[node name="TackleArea" type="Area2D" parent="." groups=["defense"]]
+visible = false
+collision_layer = 16384
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TackleArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_x8krx")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

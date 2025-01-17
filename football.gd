@@ -9,7 +9,7 @@ var past_los = false
 @onready var wide_receiver_2 = get_node("/root/GameScene/WideReceiver2")
 @onready var wide_receiver_3 = get_node("/root/GameScene/WideReceiver3")
 @onready var wide_receiver_4 = get_node("/root/GameScene/WideReceiver4")
-@export var offset: Vector2 = Vector2(7, 0)  # Offset for the football (to the right of the QB or RB)
+@export var offset: Vector2 = Vector2(0, 0)  # Offset for the football (to the right of the QB or RB)
 
 func _ready() -> void:
 	pass
