@@ -63,6 +63,8 @@ func _ready() -> void:
 	# Set the position of the sprite to the line of scrimmage position
 	$LineOfScrimmage.position = line_of_scrimmage
 	
+	$FirstDown.position = Vector2($FirstDown.position.x, line_of_scrimmage.y - 182)
+	
 	# Position the players relative to the line of scrimmage
 		#Offense
 	quarterback.position = line_of_scrimmage + Vector2(0, 75)  # QB position
@@ -152,6 +154,14 @@ func end_of_play() -> void:
 		$LineOfScrimmage.position = line_of_scrimmage
 		print("New Line of Scrimmage Y Position: ", line_of_scrimmage.y)
 		
+		# Check if the line of scrimmage is at or past -725
+		if line_of_scrimmage.y <= -725:
+			$FirstDown.position = Vector2($FirstDown.position.x, -900)
+			print("First Down set to -900 because Line of Scrimmage is <= -725")
+		elif $FirstDown.position.y >= $LineOfScrimmage.position.y:
+			$FirstDown.position = Vector2($FirstDown.position.x, line_of_scrimmage.y - 182)
+			print("First Down! Position adjusted")
+		
 		football.linear_velocity = Vector2(0, 0)
 		
 		# Reset players to pre-play positions
@@ -236,6 +246,7 @@ func _on_football_area_entered(area: Area2D) -> void:
 	
 	if area.is_in_group("defense"):
 		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
+			last_football_position_y = football.global_position.y
 			tackled = true
 		else:
 			pass

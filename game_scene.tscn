@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=32 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
@@ -27,12 +27,16 @@
 [ext_resource type="PackedScene" uid="uid://5mp4237411r7" path="res://DefensiveBack2.tscn" id="15_78wkv"]
 [ext_resource type="PackedScene" uid="uid://c75pd3qdfpq1m" path="res://DefensiveBack3.tscn" id="16_b6p65"]
 [ext_resource type="PackedScene" uid="uid://cvsn6i6k5ab18" path="res://DefensiveBack4.tscn" id="17_wtido"]
+[ext_resource type="Texture2D" uid="uid://gno84jyclxr2" path="res://art/FirstDown.png" id="28_p0bla"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gd3f"]
 size = Vector2(977.258, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tgcmy"]
 size = Vector2(486, 3.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpaaa"]
+size = Vector2(975.48, 3)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_68k8h")
@@ -949,5 +953,16 @@ shape = SubResource("RectangleShape2D_tgcmy")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LineOfScrimmage" groups=["LOS"]]
 position = Vector2(252, 0)
 shape = SubResource("RectangleShape2D_tgcmy")
+
+[node name="FirstDown" type="Area2D" parent="."]
+position = Vector2(0, -182)
+
+[node name="Sprite2D" type="Sprite2D" parent="FirstDown"]
+scale = Vector2(121.973, 0.375)
+texture = ExtResource("28_p0bla")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FirstDown"]
+visible = false
+shape = SubResource("RectangleShape2D_dpaaa")
 
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]

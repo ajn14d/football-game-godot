@@ -34,7 +34,7 @@ func _physics_process(delta):
 # Function to move the RDT towards the WR
 func pursue():
 	# Desired distance to maintain from the WR
-	var desired_distance = 35  # Adjust this value as needed
+	var desired_distance = 25  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_wr1 = (wr1.global_position - global_position).normalized()
