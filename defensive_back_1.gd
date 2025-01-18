@@ -1,20 +1,27 @@
 extends RigidBody2D
 
-@export var speed = 90  # Speed at which the tackle chases the QB
+@onready var game_scene = get_node("/root/GameScene")
+
+@export var speed = 70  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 # Reference to the Football node
 var wr1: Node2D
+var rb = Node2D
 
 # Flag to stop pursuing the QB
 var is_blocked = false
+
+var pre_cover_ = true
 
 # Timer node to handle the break block attempts
 var block_timer: Timer
 
 func _ready():
+	print(game_scene.pass_play)
 	# Find the football node in the scene
 	wr1 = get_node("/root/GameScene/WideReceiver1")
+	rb = get_node("/root/GameScene/Runningback")
 	
 	# Create and configure the Timer node
 	block_timer = Timer.new()
@@ -28,11 +35,17 @@ func _physics_process(delta):
 		return  # No football found; do nothing
 
 	# Only call pursue if RDT is not blocked
-	if not is_blocked:
-		pursue()
+	if not is_blocked and not wr1.has_ball and pre_cover_:
+		pre_cover()
+	elif not is_blocked and not wr1.has_ball and not pre_cover_ and not game_scene.run_play:
+		cover()
+	elif game_scene.run_play:
+		pass
+	else:
+		persue()
 
-# Function to move the RDT towards the WR
-func pursue():
+# Function to for the RDT to cover the WR
+func cover():
 	# Desired distance to maintain from the WR
 	var desired_distance = 25  # Adjust this value as needed
 	
@@ -45,6 +58,54 @@ func pursue():
 	# Move only if the current distance is greater than the desired distance
 	if distance_to_wr1 > desired_distance:
 		linear_velocity = direction_to_wr1 * speed
+	else:
+		# Stop moving if within the desired distance
+		linear_velocity = Vector2.ZERO
+
+func pre_cover() -> void:
+	# Move straight north
+	linear_velocity = Vector2(0, -speed)
+	
+	# Wait for 0.2 seconds
+	await get_tree().create_timer(0.5).timeout
+	
+	pre_cover_ = false
+	
+	# Stop movement and call the next function
+	linear_velocity = Vector2.ZERO
+
+# Function to move the RDT towards the WR
+func persue():
+	# Desired distance to maintain from the WR
+	var desired_distance = 0  # Adjust this value as needed
+	
+	# Calculate direction to the WR
+	var direction_to_wr1 = (wr1.global_position - global_position).normalized()
+	
+	# Calculate the current distance to the WR
+	var distance_to_wr1 = global_position.distance_to(wr1.global_position)
+	
+	# Move only if the current distance is greater than the desired distance
+	if distance_to_wr1 > desired_distance:
+		linear_velocity = direction_to_wr1 * speed
+	else:
+		# Stop moving if within the desired distance
+		linear_velocity = Vector2.ZERO
+
+# Function to move the RDT towards the WR
+func persue_rb():
+	# Desired distance to maintain from the WR
+	var desired_distance = 0  # Adjust this value as needed
+	
+	# Calculate direction to the WR
+	var direction_to_rb = (rb.global_position - global_position).normalized()
+	
+	# Calculate the current distance to the WR
+	var distance_to_rb = global_position.distance_to(rb.global_position)
+	
+	# Move only if the current distance is greater than the desired distance
+	if distance_to_rb > desired_distance:
+		linear_velocity = direction_to_rb * speed
 	else:
 		# Stop moving if within the desired distance
 		linear_velocity = Vector2.ZERO

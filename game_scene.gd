@@ -7,6 +7,10 @@ var snap_speed = 200
 
 var tackled = false
 
+# Bools to tell if run play or pass play
+var run_play = false
+var pass_play = false
+
 # Define the position for the line of scrimmage
 var line_of_scrimmage: Vector2 = Vector2(0, 544)
 var last_football_position_y: float = 0.0  # Store the last position of the football's Y
@@ -134,6 +138,13 @@ func _process(delta: float) -> void:
 		center.after_block_engage = false
 		pass_play_1()
 	if tackled:
+		# Remove the ball from all potential ball carriers
+		quarterback.has_ball = false 
+		runningback.has_ball = false
+		wide_receiver_1.has_ball = false
+		wide_receiver_2.has_ball = false
+		wide_receiver_3.has_ball = false
+		wide_receiver_4.has_ball = false
 		end_of_play()
 		tackled = false
 
@@ -179,6 +190,8 @@ func pre_play() -> void:
 	wide_receiver_2.has_ball = false
 	wide_receiver_3.has_ball = false
 	wide_receiver_4.has_ball = false
+	
+	defensive_back_1.pre_cover_ = true
 	
 	center.after_block_engage = false
 	center.is_blocked = false
@@ -246,13 +259,18 @@ func _on_football_area_entered(area: Area2D) -> void:
 	
 	if area.is_in_group("defense"):
 		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
-			last_football_position_y = football.global_position.y
+			#last_football_position_y = football.global_position.y
 			tackled = true
 		else:
 			pass
 
 #PlayBook11
 func pass_play_1() -> void:
+	
+	# Bools to tell if run play or pass play
+	run_play = false
+	pass_play = true
+	
 	if not wide_receiver_1.has_ball:
 		# Move straight north until the receiver has traveled the specified distance
 		if wide_receiver_1.position.y > line_of_scrimmage.y -25:
