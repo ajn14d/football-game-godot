@@ -54,6 +54,12 @@ var db_2_pre_cover_duration = 0.0
 var db_3_pre_cover_duration = 0.0
 var db_4_pre_cover_duration = 0.0
 
+# Random float to detmine distance of DB coverage.
+var db_1_cover_distance = 0.0
+var db_2_cover_distance = 0.0
+var db_3_cover_distance = 0.0
+var db_4_cover_distance = 0.0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -197,20 +203,26 @@ func pre_play() -> void:
 	wide_receiver_3.has_ball = false
 	wide_receiver_4.has_ball = false
 	
+	center.after_block_engage = false
+	center.is_blocked = false
+	
+	# Below are factors for Defensive backs. Include Bools, variables and randomized floats to mimic game feel and player desicion making.
 	defensive_back_1.pre_cover_ = true
 	defensive_back_2.pre_cover_ = true
 	defensive_back_3.pre_cover_ = true
 	defensive_back_4.pre_cover_ = true
 	
-	center.after_block_engage = false
-	center.is_blocked = false
-	
-	# randomize db pre ccover time
+	# randomize db pre cover time
 	db_1_pre_cover_duration = 0.5 + randf() * 1.5
-	print(db_1_pre_cover_duration)
 	db_2_pre_cover_duration = 0.5 + randf() * 1.5
 	db_3_pre_cover_duration = 0.5 + randf() * 1.5
 	db_4_pre_cover_duration = 0.5 + randf() * 1.5
+	
+	# Randomize db cover distance
+	db_1_cover_distance = 10 + randf() * 60
+	db_2_cover_distance = 10 + randf() * 60
+	db_3_cover_distance = 10 + randf() * 60
+	db_4_cover_distance = 10 + randf() * 60
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage

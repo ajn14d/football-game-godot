@@ -39,9 +39,11 @@ func _physics_process(delta):
 	# Only call pursue if RDT is not blocked
 	if not is_blocked and not wr3.has_ball and pre_cover_:
 		pre_cover()
-	elif not is_blocked and not wr3.has_ball and not pre_cover_ and not game_scene.run_play:
+	elif not is_blocked and not wr3.has_ball and not rb.has_ball and not pre_cover_ and not game_scene.run_play:
 		cover()
 	elif game_scene.run_play:
+		persue_rb()
+	elif rb.has_ball:
 		persue_rb()
 	else:
 		persue()
@@ -49,7 +51,7 @@ func _physics_process(delta):
 # Function to for the RDT to cover the WR
 func cover():
 	# Desired distance to maintain from the WR
-	var desired_distance = 25  # Adjust this value as needed
+	var desired_distance = game_scene.db_3_cover_distance  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_wr3 = (wr3.global_position - global_position).normalized()
