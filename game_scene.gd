@@ -48,6 +48,12 @@ var pre_play_positions: Dictionary = {}
 @onready var right_defensive_end = $RightDefensiveEnd
 @onready var left_defensive_end = $LeftDefensiveEnd
 
+# Random float values to determine length of pre-coverage for DB's
+var db_1_pre_cover_duration = 0.0
+var db_2_pre_cover_duration = 0.0
+var db_3_pre_cover_duration = 0.0
+var db_4_pre_cover_duration = 0.0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -192,9 +198,19 @@ func pre_play() -> void:
 	wide_receiver_4.has_ball = false
 	
 	defensive_back_1.pre_cover_ = true
+	defensive_back_2.pre_cover_ = true
+	defensive_back_3.pre_cover_ = true
+	defensive_back_4.pre_cover_ = true
 	
 	center.after_block_engage = false
 	center.is_blocked = false
+	
+	# randomize db pre ccover time
+	db_1_pre_cover_duration = 0.5 + randf() * 1.5
+	print(db_1_pre_cover_duration)
+	db_2_pre_cover_duration = 0.5 + randf() * 1.5
+	db_3_pre_cover_duration = 0.5 + randf() * 1.5
+	db_4_pre_cover_duration = 0.5 + randf() * 1.5
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage

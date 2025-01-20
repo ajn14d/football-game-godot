@@ -5,6 +5,8 @@ extends RigidBody2D
 @export var speed = 70  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
+var random_duration = 0.0
+
 # Reference to the Football node
 var wr1: Node2D
 var rb = Node2D
@@ -40,7 +42,7 @@ func _physics_process(delta):
 	elif not is_blocked and not wr1.has_ball and not pre_cover_ and not game_scene.run_play:
 		cover()
 	elif game_scene.run_play:
-		pass
+		persue_rb()
 	else:
 		persue()
 
@@ -63,11 +65,12 @@ func cover():
 		linear_velocity = Vector2.ZERO
 
 func pre_cover() -> void:
-	# Move straight north
-	linear_velocity = Vector2(0, -speed)
 	
-	# Wait for 0.2 seconds
-	await get_tree().create_timer(0.5).timeout
+	# Drop back into pre coverage
+	linear_velocity = Vector2(wr1.position.x - position.x, -speed)
+	
+	# Wait for timer
+	await get_tree().create_timer(game_scene.db_1_pre_cover_duration).timeout
 	
 	pre_cover_ = false
 	
