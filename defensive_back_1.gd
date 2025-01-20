@@ -10,6 +10,8 @@ var random_duration = 0.0
 # Reference to the Football node
 var wr1: Node2D
 var rb = Node2D
+var qb = Node2D
+var football = Node2D
 
 # Flag to stop pursuing the QB
 var is_blocked = false
@@ -24,6 +26,9 @@ func _ready():
 	# Find the football node in the scene
 	wr1 = get_node("/root/GameScene/WideReceiver1")
 	rb = get_node("/root/GameScene/Runningback")
+	qb = get_node("/root/GameScene/Quarterback")
+	football = get_node("/root/GameScene/Football")
+	
 	
 	# Create and configure the Timer node
 	block_timer = Timer.new()
@@ -39,12 +44,14 @@ func _physics_process(delta):
 	# Only call pursue if RDT is not blocked
 	if not is_blocked and not wr1.has_ball and pre_cover_:
 		pre_cover()
-	elif not is_blocked and not wr1.has_ball and not rb.has_ball and not pre_cover_ and not game_scene.run_play:
+	elif not is_blocked and not wr1.has_ball and not rb.has_ball and not pre_cover_ and not game_scene.run_play and not football.past_los:
 		cover()
 	elif game_scene.run_play:
 		persue_rb()
 	elif rb.has_ball:
 		persue_rb()
+	elif qb.has_ball and football.past_los:
+		persue_qb()
 	else:
 		persue()
 
@@ -97,7 +104,6 @@ func persue():
 		# Stop moving if within the desired distance
 		linear_velocity = Vector2.ZERO
 
-# Function to move the RDT towards the WR
 func persue_rb():
 	# Desired distance to maintain from the WR
 	var desired_distance = 0  # Adjust this value as needed
@@ -111,6 +117,24 @@ func persue_rb():
 	# Move only if the current distance is greater than the desired distance
 	if distance_to_rb > desired_distance:
 		linear_velocity = direction_to_rb * speed
+	else:
+		# Stop moving if within the desired distance
+		linear_velocity = Vector2.ZERO
+
+# Function to move the RDT towards the WR
+func persue_qb():
+	# Desired distance to maintain from the WR
+	var desired_distance = 0  # Adjust this value as needed
+	
+	# Calculate direction to the WR
+	var direction_to_qb = (qb.global_position - global_position).normalized()
+	
+	# Calculate the current distance to the WR
+	var distance_to_qb = global_position.distance_to(rb.global_position)
+	
+	# Move only if the current distance is greater than the desired distance
+	if distance_to_qb > desired_distance:
+		linear_velocity = direction_to_qb * speed
 	else:
 		# Stop moving if within the desired distance
 		linear_velocity = Vector2.ZERO

@@ -219,10 +219,10 @@ func pre_play() -> void:
 	db_4_pre_cover_duration = 0.5 + randf() * 1.5
 	
 	# Randomize db cover distance
-	db_1_cover_distance = 10 + randf() * 60
-	db_2_cover_distance = 10 + randf() * 60
-	db_3_cover_distance = 10 + randf() * 60
-	db_4_cover_distance = 10 + randf() * 60
+	db_1_cover_distance = 5 + randf() * 60
+	db_2_cover_distance = 5 + randf() * 60
+	db_3_cover_distance = 5 + randf() * 60
+	db_4_cover_distance = 5 + randf() * 60
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage

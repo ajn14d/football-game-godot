@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var speed = 40  # Speed at which the tackle chases the QB
+@export var speed = 55  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 # Reference to the Football node
