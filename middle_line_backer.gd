@@ -1,6 +1,14 @@
 extends RigidBody2D
 
-@export var speed = 55  # Speed at which the tackle chases the QB
+@onready var game_scene = get_node("/root/GameScene")
+@onready var rb = get_node("/root/GameScene/Runningback")
+@onready var qb = get_node("/root/GameScene/Quarterback")
+@onready var wr1 = get_node("/root/GameScene/WideReceiver1")
+@onready var wr2 = get_node("/root/GameScene/WideReceiver2")
+@onready var wr3 = get_node("/root/GameScene/WideReceiver3")
+@onready var wr4 = get_node("/root/GameScene/WideReceiver4")
+
+@export var speed = 65  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 # Reference to the Football node
@@ -8,6 +16,11 @@ var football: Node2D
 
 # Flag to stop pursuing the QB
 var is_blocked = false
+
+var blitz_bool = false
+var drop_coverage_bool = false
+
+var in_coverage_bool = false
 
 # Timer node to handle the break block attempts
 var block_timer: Timer
@@ -28,10 +41,47 @@ func _physics_process(delta):
 		return  # No football found; do nothing
 
 	# Only call pursue if RDT is not blocked
-	if not is_blocked:
+	if not is_blocked and game_scene.middle_linebacker_play == 0:
+		blitz()
+
+	if not is_blocked and drop_coverage_bool and not in_coverage_bool and not football.football_thrown and not football.past_los and game_scene.middle_linebacker_play == 1:
+		drop_coverage()
+	
+	elif in_coverage_bool and not football.football_thrown and not football.past_los:
+		in_coverage()
+	
+	else:
 		pursue()
 
-# Function to move the RDT towards the QB
+func blitz():
+		
+	# Calculate direction to the football
+	var direction_to_football = (football.global_position - global_position).normalized()
+
+	# Set the RDT's velocity directly
+	linear_velocity = direction_to_football * speed
+
+func drop_coverage() -> void:
+	
+	# Drop back into pre coverage
+	linear_velocity = Vector2(game_scene.middle_linebacker_coverage_angle, -speed)
+	
+	# Wait for timer
+	await get_tree().create_timer(1.0).timeout
+	
+	if football.football_thrown:
+		drop_coverage_bool = false
+	
+	in_coverage()
+	
+func in_coverage() -> void:
+	
+	in_coverage_bool = true
+	
+	# Drop back into pre coverage
+	linear_velocity = Vector2(0, 0)
+	
+# Function to move the LB towards the football
 func pursue():
 	# Calculate direction to the QB
 	var direction_to_football = (football.global_position - global_position).normalized()

@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var speed = 55  # Speed at which the tackle chases the QB
+@export var speed = 65  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 # Reference to the Football node
@@ -51,13 +51,13 @@ func blocked():
 
 # Function to handle detection event when OT enters the area
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("OT"):
+	if body.is_in_group("nogroup"):
 		#print("OG detected")
 		blocked()  # Stop movement when OG is detected
 
 # Function to handle detection event when OT exits the area
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("OT"):
+	if body.is_in_group("nogroup"):
 		#print("OG exited, resuming pursuit")
 		is_blocked = false  # Reset the flag to allow pursuit again
 		block_timer.stop()  # Stop the timer when no longer blocked

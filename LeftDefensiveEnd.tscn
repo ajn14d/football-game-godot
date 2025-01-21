@@ -11,7 +11,7 @@ height = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vnxrx"]
 radius = 12.0
-height = 40.0
+height = 74.0
 
 [node name="LeftDefensiveEnd" type="RigidBody2D" groups=["DE", "player"]]
 rotation = 1.5708

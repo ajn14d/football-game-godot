@@ -60,6 +60,10 @@ var db_2_cover_distance = 0.0
 var db_3_cover_distance = 0.0
 var db_4_cover_distance = 0.0
 
+# Random Int to determine Linebacker plays
+var middle_linebacker_play = 0
+var middle_linebacker_coverage_angle = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -193,6 +197,7 @@ func end_of_play() -> void:
 # Function to reset players' positions to pre-play positions
 func pre_play() -> void:
 	
+	football.football_thrown = false
 	football.past_los = false
 	
 	# Remove the ball from all potential ball carriers
@@ -223,6 +228,32 @@ func pre_play() -> void:
 	db_2_cover_distance = 5 + randf() * 60
 	db_3_cover_distance = 5 + randf() * 60
 	db_4_cover_distance = 5 + randf() * 60
+	
+	# set bools for linebacker play select to false
+	middle_linebacker.blitz_bool = false
+	middle_linebacker.drop_coverage_bool = false
+	middle_linebacker.in_coverage_bool = false
+	
+	# Random Int to determine Linebackers play selection
+	middle_linebacker_play = (randi() % 2)
+	print("Linebacker play Int ", middle_linebacker_play)
+	
+	if middle_linebacker_play == 1:
+		middle_linebacker.drop_coverage_bool = true
+	
+	#Randomize coverage angle for LB's
+	middle_linebacker_coverage_angle = (randi() % 5)
+	if middle_linebacker_coverage_angle == 0:
+		middle_linebacker_coverage_angle = -40
+	elif middle_linebacker_coverage_angle == 1:
+		middle_linebacker_coverage_angle = -20
+	elif middle_linebacker_coverage_angle == 2:
+		middle_linebacker_coverage_angle = 0
+	elif middle_linebacker_coverage_angle == 3:
+		middle_linebacker_coverage_angle = 20
+	elif middle_linebacker_coverage_angle == 4:
+		middle_linebacker_coverage_angle = 40
+
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage

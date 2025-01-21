@@ -11,7 +11,7 @@ height = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yn2hk"]
 radius = 12.0
-height = 40.0
+height = 76.0
 
 [node name="MiddleLineBacker" type="RigidBody2D" groups=["LB", "player"]]
 rotation = 1.5708

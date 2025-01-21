@@ -11,7 +11,7 @@ height = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye76y"]
 radius = 12.0
-height = 40.0
+height = 86.0
 
 [node name="LeftDefensiveTackle" type="RigidBody2D" groups=["DT"]]
 collision_layer = 16

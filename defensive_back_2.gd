@@ -2,7 +2,7 @@ extends RigidBody2D
 
 @onready var game_scene = get_node("/root/GameScene")
 
-@export var speed = 70  # Speed at which the tackle chases the QB
+@export var speed = 100  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 var random_duration = 0.0
@@ -89,7 +89,7 @@ func pre_cover() -> void:
 # Function to move the RDT towards the WR
 func persue():
 	# Desired distance to maintain from the WR
-	var desired_distance = 0  # Adjust this value as needed
+	var desired_distance = 5  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_wr2 = (wr2.global_position - global_position).normalized()
@@ -106,7 +106,7 @@ func persue():
 
 func persue_rb():
 	# Desired distance to maintain from the WR
-	var desired_distance = 0  # Adjust this value as needed
+	var desired_distance = 5  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_rb = (rb.global_position - global_position).normalized()
@@ -124,7 +124,7 @@ func persue_rb():
 # Function to move the RDT towards the WR
 func persue_qb():
 	# Desired distance to maintain from the WR
-	var desired_distance = 0  # Adjust this value as needed
+	var desired_distance = 5  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_qb = (qb.global_position - global_position).normalized()
