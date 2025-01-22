@@ -66,13 +66,12 @@ func drop_coverage() -> void:
 	# Drop back into pre coverage
 	linear_velocity = Vector2(game_scene.outside_linebacker_1_coverage_angle, -speed)
 	
-	# Wait for timer
-	await get_tree().create_timer(1.5).timeout
+	if position.y + 200 < game_scene.line_of_scrimmage.y:
 	
-	if football.football_thrown:
-		drop_coverage_bool = false
-	
-	in_coverage()
+		if football.football_thrown:
+			drop_coverage_bool = false
+		
+		in_coverage()
 	
 func in_coverage() -> void:
 	

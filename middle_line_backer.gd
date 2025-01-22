@@ -22,6 +22,8 @@ var drop_coverage_bool = false
 
 var in_coverage_bool = false
 
+var drop_coverage_timer = null
+
 # Timer node to handle the break block attempts
 var block_timer: Timer
 
@@ -66,13 +68,12 @@ func drop_coverage() -> void:
 	# Drop back into pre coverage
 	linear_velocity = Vector2(game_scene.middle_linebacker_coverage_angle, -speed)
 	
-	# Wait for timer
-	await get_tree().create_timer(3.0).timeout
+	if position.y + 200 < game_scene.line_of_scrimmage.y:
 	
-	if football.football_thrown:
-		drop_coverage_bool = false
-	
-	in_coverage()
+		if football.football_thrown:
+			drop_coverage_bool = false
+		
+		in_coverage()
 	
 func in_coverage() -> void:
 	
