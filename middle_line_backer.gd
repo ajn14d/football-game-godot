@@ -52,7 +52,7 @@ func _physics_process(delta):
 	elif in_coverage_bool and not football.football_thrown and not football.past_los:
 		in_coverage()
 	
-	else:
+	elif not is_blocked:
 		pursue()
 
 func blitz():
@@ -103,7 +103,7 @@ func blocked():
 # Function to handle detection event when C enters the area
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("C"):
-		#print("OG detected")
+		print("C detected")
 		blocked()  # Stop movement when OG is detected
 
 # Function to handle detection event when C exits the area
