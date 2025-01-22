@@ -67,10 +67,10 @@ func blitz():
 func drop_coverage() -> void:
 	
 	# Drop back into pre coverage
-	linear_velocity = Vector2(0, -speed)
+	linear_velocity = Vector2(game_scene.outside_linebacker_2_coverage_angle, -speed)
 	
 	# Wait for timer
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	
 	if football.football_thrown:
 		drop_coverage_bool = false

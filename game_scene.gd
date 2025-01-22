@@ -273,6 +273,15 @@ func pre_play() -> void:
 	
 	if outside_linebacker_1_play == 1:
 		outside_linebacker_1.drop_coverage_bool = true
+	
+	#Randomize LB1 coverage angle
+	outside_linebacker_1_coverage_angle = (randi() % 3)
+	if outside_linebacker_1_coverage_angle == 0:
+		outside_linebacker_1_coverage_angle = 40
+	elif outside_linebacker_1_coverage_angle == 1:
+		outside_linebacker_1_coverage_angle = 20
+	elif outside_linebacker_1_coverage_angle == 2:
+		outside_linebacker_1_coverage_angle = 0
 
 	# Random Int to determine OLB1 play selection
 	outside_linebacker_2_play = (randi() % 3)
@@ -280,6 +289,15 @@ func pre_play() -> void:
 	
 	if outside_linebacker_2_play == 1:
 		outside_linebacker_2.drop_coverage_bool = true
+	
+	#Randomize LB2 coverage angle
+	outside_linebacker_2_coverage_angle = (randi() % 3)
+	if outside_linebacker_2_coverage_angle == 0:
+		outside_linebacker_2_coverage_angle = -40
+	elif outside_linebacker_2_coverage_angle == 1:
+		outside_linebacker_2_coverage_angle = -20
+	elif outside_linebacker_2_coverage_angle == 2:
+		outside_linebacker_2_coverage_angle = 0
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage
@@ -402,7 +420,7 @@ func pass_play_1() -> void:
 		
 	if not runningback.has_ball:
 		# move RB NorthWest
-		runningback.velocity = Vector2(-runningback.speed / 2, -runningback.speed / 2)  # Move northwest
+		runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
 
 		# Move the wide receiver
 		runningback.move_and_slide()

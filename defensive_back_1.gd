@@ -40,20 +40,21 @@ func _ready():
 func _physics_process(delta):
 	if not wr1:
 		return  # No football found; do nothing
-
 	# Only call pursue if RDT is not blocked
 	if not is_blocked and not wr1.has_ball and pre_cover_:
 		pre_cover()
 	elif not is_blocked and not wr1.has_ball and not rb.has_ball and not pre_cover_ and not game_scene.run_play and not football.past_los:
 		cover()
+	elif football.football_thrown and wr1.has_ball:
+		pursue_wr()
 	elif game_scene.run_play:
-		persue_rb()
+		pursue_rb()
 	elif rb.has_ball:
-		persue_rb()
+		pursue_rb()
 	elif qb.has_ball and football.past_los:
-		persue_qb()
-	else:
-		persue()
+		pursue_qb()
+	elif football.football_thrown:
+		pursue()
 
 # Function to for the RDT to cover the WR
 func cover():
@@ -86,10 +87,27 @@ func pre_cover() -> void:
 	# Stop movement and call the next function
 	linear_velocity = Vector2.ZERO
 
-# Function to move the RDT towards the WR
-func persue():
+func pursue():
 	# Desired distance to maintain from the WR
-	var desired_distance = 5  # Adjust this value as needed
+	var desired_distance = 0  # Adjust this value as needed
+	
+	# Calculate direction to the WR
+	var direction_to_football = (football.global_position - global_position).normalized()
+	
+	# Calculate the current distance to the WR
+	var distance_to_football = global_position.distance_to(football.global_position)
+	
+	# Move only if the current distance is greater than the desired distance
+	if distance_to_football > desired_distance:
+		linear_velocity = direction_to_football * speed
+	else:
+		# Stop moving if within the desired distance
+		linear_velocity = Vector2.ZERO
+
+# Function to move the RDT towards the WR
+func pursue_wr():
+	# Desired distance to maintain from the WR
+	var desired_distance = 15  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_wr1 = (wr1.global_position - global_position).normalized()
@@ -104,9 +122,9 @@ func persue():
 		# Stop moving if within the desired distance
 		linear_velocity = Vector2.ZERO
 
-func persue_rb():
+func pursue_rb():
 	# Desired distance to maintain from the WR
-	var desired_distance = 5  # Adjust this value as needed
+	var desired_distance = 15  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_rb = (rb.global_position - global_position).normalized()
@@ -122,9 +140,9 @@ func persue_rb():
 		linear_velocity = Vector2.ZERO
 
 # Function to move the RDT towards the WR
-func persue_qb():
+func pursue_qb():
 	# Desired distance to maintain from the WR
-	var desired_distance = 5  # Adjust this value as needed
+	var desired_distance = 15  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_qb = (qb.global_position - global_position).normalized()

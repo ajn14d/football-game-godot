@@ -67,7 +67,7 @@ func drop_coverage() -> void:
 	linear_velocity = Vector2(game_scene.middle_linebacker_coverage_angle, -speed)
 	
 	# Wait for timer
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(3.0).timeout
 	
 	if football.football_thrown:
 		drop_coverage_bool = false
