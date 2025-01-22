@@ -64,6 +64,11 @@ var db_4_cover_distance = 0.0
 var middle_linebacker_play = 0
 var middle_linebacker_coverage_angle = 0
 
+var outside_linebacker_1_play = 0
+var outside_linebacker_1_coverage_angle = 0
+
+var outside_linebacker_2_play = 0
+var outside_linebacker_2_coverage_angle = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -234,9 +239,17 @@ func pre_play() -> void:
 	middle_linebacker.drop_coverage_bool = false
 	middle_linebacker.in_coverage_bool = false
 	
-	# Random Int to determine Linebackers play selection
+	outside_linebacker_1.blitz_bool = false
+	outside_linebacker_1.drop_coverage_bool = false
+	outside_linebacker_1.in_coverage_bool = false
+	
+	outside_linebacker_2.blitz_bool = false
+	outside_linebacker_2.drop_coverage_bool = false
+	outside_linebacker_2.in_coverage_bool = false
+	
+	# Random Int to determine MLB play selection
 	middle_linebacker_play = (randi() % 2)
-	print("Linebacker play Int ", middle_linebacker_play)
+	print("MLB play ", middle_linebacker_play)
 	
 	if middle_linebacker_play == 1:
 		middle_linebacker.drop_coverage_bool = true
@@ -253,7 +266,20 @@ func pre_play() -> void:
 		middle_linebacker_coverage_angle = 20
 	elif middle_linebacker_coverage_angle == 4:
 		middle_linebacker_coverage_angle = 40
+	
+	# Random Int to determine OLB1 play selection
+	outside_linebacker_1_play = (randi() % 2)
+	print("OLB1 play ", outside_linebacker_1_play)
+	
+	if outside_linebacker_1_play == 1:
+		outside_linebacker_1.drop_coverage_bool = true
 
+	# Random Int to determine OLB1 play selection
+	outside_linebacker_2_play = (randi() % 3)
+	print("OLB2 play ", outside_linebacker_2_play)
+	
+	if outside_linebacker_2_play == 1:
+		outside_linebacker_2.drop_coverage_bool = true
 	
 	play_ended = false
 	# Calculate the offset from the original line of scrimmage
