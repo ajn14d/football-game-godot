@@ -21,6 +21,8 @@ var pre_play_positions: Dictionary = {}
 # load menu node
 @onready var pause_node = $PauseNode
 
+var play_select = 1
+
 #Loading Player Node's
 @onready var players = $Players
 	#Offense
@@ -157,7 +159,10 @@ func _process(delta: float) -> void:
 	if pause_node.play_start:
 		center.is_blocked = false
 		center.after_block_engage = false
-		pass_play_1()
+		if play_select == 1:
+			pass_play_1()
+		elif play_select == 2:
+			pass_play_2()
 	if tackled:
 		# Remove the ball from all potential ball carriers
 		quarterback.has_ball = false 
@@ -367,7 +372,7 @@ func _on_football_area_entered(area: Area2D) -> void:
 		else:
 			pass
 
-#PlayBook11
+#PlayBook
 func pass_play_1() -> void:
 	
 	# Bools to tell if run play or pass play
@@ -415,6 +420,46 @@ func pass_play_1() -> void:
 			# Once the receiver has moved 100 units, change direction to northwest
 			wide_receiver_4.velocity = Vector2(wide_receiver_4.speed / 2, -wide_receiver_4.speed / 2)  # Move northwest
 
+		# Move the wide receiver
+		wide_receiver_4.move_and_slide()
+		
+	if not runningback.has_ball:
+		# move RB NorthWest
+		runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
+
+		# Move the wide receiver
+		runningback.move_and_slide()
+
+func pass_play_2() -> void:
+	
+	# Bools to tell if run play or pass play
+	run_play = false
+	pass_play = true
+	
+	if not wide_receiver_1.has_ball:
+		# Move straight 
+		wide_receiver_1.velocity = Vector2(0, -wide_receiver_1.speed)  # Move straight north
+
+		wide_receiver_1.move_and_slide()
+	
+	if not wide_receiver_2.has_ball:
+		# Move straight 
+		wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
+		
+		# Move the wide receiver
+		wide_receiver_2.move_and_slide()
+		
+	if not wide_receiver_3.has_ball:
+		# Move straight 
+		wide_receiver_3.velocity = Vector2(0, -wide_receiver_3.speed)  # Move straight north
+		
+		# Move the wide receiver
+		wide_receiver_3.move_and_slide()
+		
+	if not wide_receiver_4.has_ball:
+		# Move straight 
+		wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
+		
 		# Move the wide receiver
 		wide_receiver_4.move_and_slide()
 		

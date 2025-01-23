@@ -54,12 +54,13 @@ func _physics_process(delta):
 	elif qb.has_ball and football.past_los:
 		pursue_qb()
 	elif football.football_thrown:
-		pursue()
+		await get_tree().create_timer(0.3).timeout
+		tackle_wr()
 
 # Function to for the RDT to cover the WR
 func cover():
 	# Desired distance to maintain from the WR
-	var desired_distance = game_scene.db_1_cover_distance  # Adjust this value as needed
+	var desired_distance = game_scene.db_4_cover_distance  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_wr4 = (wr4.global_position - global_position).normalized()
@@ -80,7 +81,7 @@ func pre_cover() -> void:
 	linear_velocity = Vector2(wr4.position.x - position.x, -speed)
 	
 	# Wait for timer
-	await get_tree().create_timer(game_scene.db_1_pre_cover_duration).timeout
+	await get_tree().create_timer(game_scene.db_4_pre_cover_duration).timeout
 	
 	pre_cover_ = false
 	
@@ -108,6 +109,23 @@ func pursue():
 func pursue_wr():
 	# Desired distance to maintain from the WR
 	var desired_distance = 15  # Adjust this value as needed
+	
+	# Calculate direction to the WR
+	var direction_to_wr4 = (wr4.global_position - global_position).normalized()
+	
+	# Calculate the current distance to the WR
+	var distance_to_wr4 = global_position.distance_to(wr4.global_position)
+	
+	# Move only if the current distance is greater than the desired distance
+	if distance_to_wr4 > desired_distance:
+		linear_velocity = direction_to_wr4 * speed
+	else:
+		# Stop moving if within the desired distance
+		linear_velocity = Vector2.ZERO
+
+func tackle_wr():
+	# Desired distance to maintain from the WR
+	var desired_distance = 0  # Adjust this value as needed
 	
 	# Calculate direction to the WR
 	var direction_to_wr4 = (wr4.global_position - global_position).normalized()

@@ -103,7 +103,7 @@ func blocked():
 # Function to handle detection event when C enters the area
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("C"):
-		print("C detected")
+		#print("C detected")
 		blocked()  # Stop movement when OG is detected
 
 # Function to handle detection event when C exits the area
