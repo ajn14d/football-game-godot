@@ -2,13 +2,16 @@ extends RigidBody2D
 
 @onready var game_scene = get_node("/root/GameScene")
 
-@export var speed = 100  # Speed at which the tackle chases the QB
+@export var speed = 80  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 var random_duration = 0.0
 
 # Reference to the Football node
 var wr1: Node2D
+var wr2: Node2D
+var wr3: Node2D
+var wr4: Node2D
 var rb = Node2D
 var qb = Node2D
 var football = Node2D
@@ -25,6 +28,9 @@ func _ready():
 	print(game_scene.pass_play)
 	# Find the football node in the scene
 	wr1 = get_node("/root/GameScene/WideReceiver1")
+	wr2 = get_node("/root/GameScene/WideReceiver2")
+	wr3 = get_node("/root/GameScene/WideReceiver3")
+	wr4 = get_node("/root/GameScene/WideReceiver4")
 	rb = get_node("/root/GameScene/Runningback")
 	qb = get_node("/root/GameScene/Quarterback")
 	football = get_node("/root/GameScene/Football")
@@ -53,9 +59,8 @@ func _physics_process(delta):
 		pursue_rb()
 	elif qb.has_ball and football.past_los:
 		pursue_qb()
-	elif football.football_thrown:
-		await get_tree().create_timer(0.3).timeout
-		tackle_wr()
+	elif wr1.has_ball or wr2.has_ball or wr3.has_ball or wr4.has_ball:
+		pursue()
 
 # Function to for the RDT to cover the WR
 func cover():

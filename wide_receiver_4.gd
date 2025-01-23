@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 100  # Normal movement speed
+@export var speed = 80  # Normal movement speed
 @export var sprint_speed = 150  # Sprint speed
 @export var max_stamina = 100  # Maximum stamina
 @export var stamina_depletion_rate = 40  # Stamina drained per second
-@export var ball_speed_min = 50  # Minimum speed when holding the ball
+@export var ball_speed_min = 40  # Minimum speed when holding the ball
 @export var speed_reduction_rate = 10  # Speed reduction per second
 
 var has_ball = false
