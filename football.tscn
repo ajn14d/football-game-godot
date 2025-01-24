@@ -27,7 +27,7 @@ texture = ExtResource("1_d1ynf")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 32768
-collision_mask = 18439
+collision_mask = 2147502087
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 modulate = Color(1, 1, 1, 0.231373)

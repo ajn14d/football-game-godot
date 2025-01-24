@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://1iu8uo0ds55w"]
+[gd_scene load_steps=36 format=3 uid="uid://1iu8uo0ds55w"]
 
 [ext_resource type="Script" path="res://game_scene.gd" id="1_68k8h"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_l4xoe"]
@@ -37,6 +37,18 @@ size = Vector2(486, 3.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpaaa"]
 size = Vector2(975.48, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cjf8"]
+size = Vector2(160, 2183)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3d3wk"]
+size = Vector2(976, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fig5d"]
+size = Vector2(980, 234.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atsk8"]
+size = Vector2(977, 182)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_68k8h")
@@ -940,6 +952,30 @@ shape = SubResource("RectangleShape2D_8gd3f")
 process_mode = 2
 script = ExtResource("11_ktj17")
 
+[node name="Control" type="Control" parent="PauseNode"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseNode/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Slant" type="Button" parent="PauseNode/Control/HBoxContainer"]
+layout_mode = 2
+text = "Slant"
+
+[node name="Go" type="Button" parent="PauseNode/Control/HBoxContainer"]
+layout_mode = 2
+text = "   Go   "
+
+[node name="Curls" type="Button" parent="PauseNode/Control/HBoxContainer"]
+layout_mode = 2
+text = "Curls"
+
 [node name="LineOfScrimmage" type="Area2D" parent="." groups=["LOS"]]
 
 [node name="LOSart" type="Sprite2D" parent="LineOfScrimmage"]
@@ -965,4 +1001,33 @@ texture = ExtResource("28_p0bla")
 visible = false
 shape = SubResource("RectangleShape2D_dpaaa")
 
+[node name="OutOfBounds" type="Area2D" parent="." groups=["OutOfBounds"]]
+visible = false
+collision_layer = 2147483648
+collision_mask = 32768
+
+[node name="OutOfBounds1" type="CollisionShape2D" parent="OutOfBounds"]
+position = Vector2(571, -3.5)
+shape = SubResource("RectangleShape2D_2cjf8")
+
+[node name="OutOfBounds2" type="CollisionShape2D" parent="OutOfBounds"]
+position = Vector2(-574, 0)
+shape = SubResource("RectangleShape2D_2cjf8")
+
+[node name="OutOfBounds3" type="CollisionShape2D" parent="OutOfBounds"]
+position = Vector2(-1, -1138.5)
+shape = SubResource("RectangleShape2D_3d3wk")
+
+[node name="OutOfBounds4" type="CollisionShape2D" parent="OutOfBounds"]
+position = Vector2(-1, 1204.75)
+shape = SubResource("RectangleShape2D_fig5d")
+
+[node name="EndZone" type="Area2D" parent="." groups=["Touchdown"]]
+
+[node name="EndZone" type="CollisionShape2D" parent="EndZone"]
+position = Vector2(-1.5, -994)
+shape = SubResource("RectangleShape2D_atsk8")
+
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]
+[connection signal="pressed" from="PauseNode/Control/HBoxContainer/Slant" to="PauseNode" method="_on_slant_pressed"]
+[connection signal="pressed" from="PauseNode/Control/HBoxContainer/Go" to="PauseNode" method="_on_go_pressed"]

@@ -6,10 +6,13 @@ var football: RigidBody2D  # Reference to the football node
 var snap_speed = 200
 
 var tackled = false
+var incomplete = false
 
 # Bools to tell if run play or pass play
 var run_play = false
 var pass_play = false
+
+var wr1_start_curl = false
 
 # Define the position for the line of scrimmage
 var line_of_scrimmage: Vector2 = Vector2(0, 544)
@@ -20,8 +23,6 @@ var pre_play_positions: Dictionary = {}
 
 # load menu node
 @onready var pause_node = $PauseNode
-
-var play_select = 1
 
 #Loading Player Node's
 @onready var players = $Players
@@ -159,10 +160,12 @@ func _process(delta: float) -> void:
 	if pause_node.play_start:
 		center.is_blocked = false
 		center.after_block_engage = false
-		if play_select == 1:
+		if pause_node.play_select == 1:
 			pass_play_1()
-		elif play_select == 2:
+		elif pause_node.play_select == 2:
 			pass_play_2()
+		elif pause_node.play_select == 3:
+			pass_play_3()
 	if tackled:
 		# Remove the ball from all potential ball carriers
 		quarterback.has_ball = false 
@@ -173,6 +176,17 @@ func _process(delta: float) -> void:
 		wide_receiver_4.has_ball = false
 		end_of_play()
 		tackled = false
+	
+	if incomplete:
+		# Remove the ball from all potential ball carriers
+		quarterback.has_ball = false 
+		runningback.has_ball = false
+		wide_receiver_1.has_ball = false
+		wide_receiver_2.has_ball = false
+		wide_receiver_3.has_ball = false
+		wide_receiver_4.has_ball = false
+		incomplete_pass()
+		incomplete = false
 
 # Handle input to trigger the end_of_play function
 func _input(event: InputEvent) -> void:
@@ -204,6 +218,16 @@ func end_of_play() -> void:
 		# Reset players to pre-play positions
 		pre_play()
 
+# Function to handle the end of play if player goes out of bounds
+func incomplete_pass() -> void:
+	if not play_ended:
+		play_ended = true
+		get_tree().paused = true  # Pause the entire game
+		print("Play Ended")
+		
+		# Reset players to pre-play positions
+		pre_play()
+
 # Function to reset players' positions to pre-play positions
 func pre_play() -> void:
 	
@@ -217,6 +241,8 @@ func pre_play() -> void:
 	wide_receiver_2.has_ball = false
 	wide_receiver_3.has_ball = false
 	wide_receiver_4.has_ball = false
+	
+	
 	
 	center.after_block_engage = false
 	center.is_blocked = false
@@ -371,6 +397,13 @@ func _on_football_area_entered(area: Area2D) -> void:
 			tackled = true
 		else:
 			pass
+	if area.is_in_group("OutOfBounds"):
+		print("football is out of bounds")
+		incomplete = true
+	
+	if area.is_in_group("Touchdown"):
+		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
+			print("Touchdown!!!")
 
 #PlayBook
 func pass_play_1() -> void:
@@ -469,3 +502,7 @@ func pass_play_2() -> void:
 
 		# Move the wide receiver
 		runningback.move_and_slide()
+
+func pass_play_3() -> void:
+	
+	pass
