@@ -1023,6 +1023,7 @@ position = Vector2(-1, 1204.75)
 shape = SubResource("RectangleShape2D_fig5d")
 
 [node name="EndZone" type="Area2D" parent="." groups=["Touchdown"]]
+visible = false
 
 [node name="EndZone" type="CollisionShape2D" parent="EndZone"]
 position = Vector2(-1.5, -994)

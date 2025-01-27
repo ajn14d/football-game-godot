@@ -254,10 +254,19 @@ func pre_play() -> void:
 	defensive_back_4.pre_cover_ = true
 	
 	# randomize db pre cover time
-	db_1_pre_cover_duration = 0.5 + randf() * 1.5
-	db_2_pre_cover_duration = 0.5 + randf() * 1.5
-	db_3_pre_cover_duration = 0.5 + randf() * 1.5
-	db_4_pre_cover_duration = 0.5 + randf() * 1.5
+	db_1_pre_cover_duration = 0.0 + randf() * 2.0
+	db_2_pre_cover_duration = 0.0 + randf() * 2.0
+	db_3_pre_cover_duration = 0.0 + randf() * 2.0
+	db_4_pre_cover_duration = 0.0 + randf() * 2.0
+	
+	if db_1_pre_cover_duration < 0.8:
+		defensive_back_1.pre_cover_ = false
+	if db_2_pre_cover_duration < 0.8:
+		defensive_back_2.pre_cover_ = false
+	if db_3_pre_cover_duration < 0.8:
+		defensive_back_3.pre_cover_ = false
+	if db_4_pre_cover_duration < 0.8:
+		defensive_back_4.pre_cover_ = false
 	
 	# Randomize db cover distance
 	db_1_cover_distance = 5 + randf() * 60
@@ -398,8 +407,12 @@ func _on_football_area_entered(area: Area2D) -> void:
 		else:
 			pass
 	if area.is_in_group("OutOfBounds"):
-		print("football is out of bounds")
-		incomplete = true
+		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
+			#last_football_position_y = football.global_position.y
+			tackled = true
+		else:
+			print("football is out of bounds")
+			incomplete = true
 	
 	if area.is_in_group("Touchdown"):
 		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
