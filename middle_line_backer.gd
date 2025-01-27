@@ -117,8 +117,9 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 func _on_try_break_block():
 	var chance = randi() % 100  # Random number between 0 and 99
 	if chance < 50:  # 50% chance to break the block
-		print("Block broken!")
+		#print("Block broken!")
 		is_blocked = false  # Allow movement again
 		block_timer.stop()  # Stop the timer
 	else:
-		print("Block held, retrying...")
+		pass
+		#print("Block held, retrying...")

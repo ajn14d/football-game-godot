@@ -5,7 +5,9 @@ extends Node
 
 @onready var game_scene = get_node("/root/GameScene")
 
-@onready var play_menu = $Control
+@onready var play_menu = $PlaySelect
+
+@onready var punt_play = $PlaySelect/HBoxContainer/Punt
 
 var timer_accumulator: float = 0  # Accumulator for time tracking
 var interval: float = 1.0  # Interval in seconds (once per second)
@@ -17,6 +19,12 @@ func _process(delta: float) -> void:
 			# Center the menu on the camera's view
 		play_menu.position = Vector2(-80, game_scene.line_of_scrimmage.y + 125)
 		play_menu.visible = true  # Enable the visibility of the menu
+	if game_scene.down_counter == 4:
+		punt_play.disabled = false
+		punt_play.visible = true
+	else:
+		punt_play.disabled = true
+		punt_play.visible = false
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("play_1"):
@@ -40,3 +48,6 @@ func _on_slant_pressed() -> void:
 func _on_go_pressed() -> void:
 		print("Next Play: Hail Mary")
 		play_select = 2
+
+func _on_punt_pressed() -> void:
+	print("Punt")

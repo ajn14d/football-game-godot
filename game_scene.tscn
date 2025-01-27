@@ -952,29 +952,33 @@ shape = SubResource("RectangleShape2D_8gd3f")
 process_mode = 2
 script = ExtResource("11_ktj17")
 
-[node name="Control" type="Control" parent="PauseNode"]
+[node name="PlaySelect" type="Control" parent="PauseNode"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PauseNode/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseNode/PlaySelect"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Slant" type="Button" parent="PauseNode/Control/HBoxContainer"]
+[node name="Slant" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
 layout_mode = 2
 text = "Slant"
 
-[node name="Go" type="Button" parent="PauseNode/Control/HBoxContainer"]
+[node name="Go" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
 layout_mode = 2
 text = "   Go   "
 
-[node name="Curls" type="Button" parent="PauseNode/Control/HBoxContainer"]
+[node name="Curls" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
 layout_mode = 2
 text = "Curls"
+
+[node name="Punt" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
+layout_mode = 2
+text = "Punt"
 
 [node name="LineOfScrimmage" type="Area2D" parent="." groups=["LOS"]]
 
@@ -1030,5 +1034,6 @@ position = Vector2(-1.5, -994)
 shape = SubResource("RectangleShape2D_atsk8")
 
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]
-[connection signal="pressed" from="PauseNode/Control/HBoxContainer/Slant" to="PauseNode" method="_on_slant_pressed"]
-[connection signal="pressed" from="PauseNode/Control/HBoxContainer/Go" to="PauseNode" method="_on_go_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Slant" to="PauseNode" method="_on_slant_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Go" to="PauseNode" method="_on_go_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Punt" to="PauseNode" method="_on_punt_pressed"]

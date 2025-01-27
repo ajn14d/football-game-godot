@@ -8,6 +8,10 @@ var snap_speed = 200
 var tackled = false
 var incomplete = false
 
+var down_counter = 0
+
+var ball_in_endzone = false
+
 # Bools to tell if run play or pass play
 var run_play = false
 var pass_play = false
@@ -151,7 +155,7 @@ func start_of_play() -> void:
 	if not play_ended:
 		play_ended = true
 		get_tree().paused = true  # Pause the entire game
-		print("Start")
+		#print("Start")
 		
 		# Reset players to pre-play positions
 		pre_play()
@@ -187,6 +191,11 @@ func _process(delta: float) -> void:
 		wide_receiver_4.has_ball = false
 		incomplete_pass()
 		incomplete = false
+		
+	if ball_in_endzone:
+		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
+			print("Touchdown!!!")
+			ball_in_endzone = false
 
 # Handle input to trigger the end_of_play function
 func _input(event: InputEvent) -> void:
@@ -198,20 +207,21 @@ func end_of_play() -> void:
 	if not play_ended:
 		play_ended = true
 		get_tree().paused = true  # Pause the entire game
-		print("Play Ended")
+		#print("Play Ended")
 
 		# Update the line of scrimmage to the last position of the football
 		line_of_scrimmage.y = last_football_position_y
 		$LineOfScrimmage.position = line_of_scrimmage
-		print("New Line of Scrimmage Y Position: ", line_of_scrimmage.y)
+		#print("New Line of Scrimmage Y Position: ", line_of_scrimmage.y)
 		
 		# Check if the line of scrimmage is at or past -725
 		if line_of_scrimmage.y <= -725:
 			$FirstDown.position = Vector2($FirstDown.position.x, -900)
-			print("First Down set to -900 because Line of Scrimmage is <= -725")
+			#print("First Down set to -900 because Line of Scrimmage is <= -725")
 		elif $FirstDown.position.y >= $LineOfScrimmage.position.y:
 			$FirstDown.position = Vector2($FirstDown.position.x, line_of_scrimmage.y - 182)
-			print("First Down! Position adjusted")
+			print("First Down!")
+			down_counter = 0
 		
 		football.linear_velocity = Vector2(0, 0)
 		
@@ -223,13 +233,18 @@ func incomplete_pass() -> void:
 	if not play_ended:
 		play_ended = true
 		get_tree().paused = true  # Pause the entire game
-		print("Play Ended")
+		#print("Play Ended")
 		
 		# Reset players to pre-play positions
 		pre_play()
 
 # Function to reset players' positions to pre-play positions
 func pre_play() -> void:
+	
+	ball_in_endzone = false
+	
+	down_counter += 1
+	print("CUDDRENT DOWN: ", down_counter)
 	
 	football.football_thrown = false
 	football.past_los = false
@@ -289,7 +304,7 @@ func pre_play() -> void:
 	
 	# Random Int to determine MLB play selection
 	middle_linebacker_play = (randi() % 2)
-	print("MLB play ", middle_linebacker_play)
+	#print("MLB play ", middle_linebacker_play)
 	
 	if middle_linebacker_play == 1:
 		middle_linebacker.drop_coverage_bool = true
@@ -309,7 +324,7 @@ func pre_play() -> void:
 	
 	# Random Int to determine OLB1 play selection
 	outside_linebacker_1_play = (randi() % 2)
-	print("OLB1 play ", outside_linebacker_1_play)
+	#print("OLB1 play ", outside_linebacker_1_play)
 	
 	if outside_linebacker_1_play == 1:
 		outside_linebacker_1.drop_coverage_bool = true
@@ -325,7 +340,7 @@ func pre_play() -> void:
 
 	# Random Int to determine OLB1 play selection
 	outside_linebacker_2_play = (randi() % 3)
-	print("OLB2 play ", outside_linebacker_2_play)
+	#print("OLB2 play ", outside_linebacker_2_play)
 	
 	if outside_linebacker_2_play == 1:
 		outside_linebacker_2.drop_coverage_bool = true
@@ -398,7 +413,7 @@ func _on_football_area_entered(area: Area2D) -> void:
 			last_football_position_y = football.global_position.y
 	if area.is_in_group("LOS"):
 		football.past_los = true
-		print("past the lOS")
+		#print("past the lOS")
 	
 	if area.is_in_group("defense"):
 		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
@@ -415,8 +430,7 @@ func _on_football_area_entered(area: Area2D) -> void:
 			incomplete = true
 	
 	if area.is_in_group("Touchdown"):
-		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
-			print("Touchdown!!!")
+		ball_in_endzone = true
 
 #PlayBook
 func pass_play_1() -> void:
