@@ -8,7 +8,7 @@ extends RigidBody2D
 @onready var wr3 = get_node("/root/GameScene/WideReceiver3")
 @onready var wr4 = get_node("/root/GameScene/WideReceiver4")
 
-@export var speed = 65  # Speed at which the tackle chases the QB
+@export var speed = 85  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 # Reference to the Football node

@@ -46,8 +46,12 @@ func _on_slant_pressed() -> void:
 	play_select = 1
 
 func _on_go_pressed() -> void:
-		print("Next Play: Hail Mary")
-		play_select = 2
+	print("Next Play: Hail Mary")
+	play_select = 2
+
+func _on_curls_pressed() -> void:
+	print("Next Play: Curls")
+	play_select = 3
 
 func _on_punt_pressed() -> void:
 	print("Punt")

@@ -3,6 +3,9 @@ extends Node2D
 var play_ended: bool = false  # Tracks whether the play has ended
 var football: RigidBody2D  # Reference to the football node
 
+var home_score = 0
+var away_score = 0
+
 var snap_speed = 200
 
 var tackled = false
@@ -16,7 +19,12 @@ var ball_in_endzone = false
 var run_play = false
 var pass_play = false
 
-var wr1_start_curl = false
+enum WRState { INITIAL, MOVING_NORTH, MOVING_SOUTH, MOVING_EAST, MOVING_WEST, MOVING_NORTHEAST, MOVING_NORTHWEST, MOVING_SOUTHEAST, MOVING_SOUTHWEST, NOT_MOVING }
+
+var wr1_state = WRState.INITIAL  # Initial state
+var wr2_state = WRState.INITIAL  # Initial state
+var wr3_state = WRState.INITIAL  # Initial state
+var wr4_state = WRState.INITIAL  # Initial state
 
 # Define the position for the line of scrimmage
 var line_of_scrimmage: Vector2 = Vector2(0, 544)
@@ -257,7 +265,10 @@ func pre_play() -> void:
 	wide_receiver_3.has_ball = false
 	wide_receiver_4.has_ball = false
 	
-	
+	wr1_state = WRState.INITIAL  # Initial state
+	wr2_state = WRState.INITIAL  # Initial state
+	wr3_state = WRState.INITIAL  # Initial state
+	wr4_state = WRState.INITIAL  # Initial state
 	
 	center.after_block_engage = false
 	center.is_blocked = false
@@ -531,5 +542,125 @@ func pass_play_2() -> void:
 		runningback.move_and_slide()
 
 func pass_play_3() -> void:
+	# Bools to tell if run play or pass play
+	run_play = false
+	pass_play = true
 	
-	pass
+	if not wide_receiver_1.has_ball:
+		# Check the current state of WR1
+		match wr1_state:
+			# If the state is NOT_MOVING, switch it to MOVING_NORTH
+			WRState.INITIAL:
+				wr1_state = WRState.MOVING_NORTH
+
+			# Move straight north until reaching the target position
+			WRState.MOVING_NORTH:
+				if wide_receiver_1.position.y > line_of_scrimmage.y - 140:
+					wide_receiver_1.velocity = Vector2(0, -wide_receiver_1.speed)  # Move straight north
+				else:
+					# Switch to southwest movement once target is reached
+					wr1_state = WRState.MOVING_SOUTHWEST
+
+			# Move southwest after moving north
+			WRState.MOVING_SOUTHWEST:
+				if wide_receiver_1.position.y < line_of_scrimmage.y - 100:
+					wide_receiver_1.velocity = Vector2(-wide_receiver_1.speed / 2, wide_receiver_1.speed / 2)  # Move southwest
+				else:
+					wr1_state = WRState.NOT_MOVING
+			
+			WRState.NOT_MOVING:
+				wide_receiver_1.velocity = Vector2(0, 0)
+
+		# Move the receiver
+		wide_receiver_1.move_and_slide()
+
+	if not wide_receiver_2.has_ball:
+		# Check the current state of WR1
+		match wr2_state:
+			# If the state is NOT_MOVING, switch it to MOVING_NORTH
+			WRState.INITIAL:
+				wr2_state = WRState.MOVING_NORTH
+
+			# Move straight north until reaching the target position
+			WRState.MOVING_NORTH:
+				if wide_receiver_2.position.y > line_of_scrimmage.y - 140:
+					wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
+				else:
+					# Switch to southwest movement once target is reached
+					wr2_state = WRState.MOVING_SOUTHWEST
+
+			# Move southwest after moving north
+			WRState.MOVING_SOUTHWEST:
+				if wide_receiver_2.position.y < line_of_scrimmage.y - 100:
+					wide_receiver_2.velocity = Vector2(wide_receiver_2.speed / 2, wide_receiver_2.speed / 2)  # Move southwest
+				else:
+					wr2_state = WRState.NOT_MOVING
+			
+			WRState.NOT_MOVING:
+				wide_receiver_2.velocity = Vector2(0, 0)
+
+		# Move the receiver
+		wide_receiver_2.move_and_slide()
+		
+	if not wide_receiver_3.has_ball:
+		# Check the current state of WR1
+		match wr3_state:
+			# If the state is NOT_MOVING, switch it to MOVING_NORTH
+			WRState.INITIAL:
+				wr3_state = WRState.MOVING_NORTH
+
+			# Move straight north until reaching the target position
+			WRState.MOVING_NORTH:
+				if wide_receiver_3.position.y > line_of_scrimmage.y - 100:
+					wide_receiver_3.velocity = Vector2(0, -wide_receiver_3.speed)  # Move straight north
+				else:
+					# Switch to southwest movement once target is reached
+					wr3_state = WRState.MOVING_SOUTHWEST
+
+			# Move southwest after moving north
+			WRState.MOVING_SOUTHWEST:
+				if wide_receiver_3.position.y < line_of_scrimmage.y - 100:
+					wide_receiver_3.velocity = Vector2(-wide_receiver_3.speed / 2, wide_receiver_3.speed / 2)  # Move southwest
+				else:
+					wr3_state = WRState.NOT_MOVING
+			
+			WRState.NOT_MOVING:
+				wide_receiver_3.velocity = Vector2(0, 0)
+
+		# Move the receiver
+		wide_receiver_3.move_and_slide()
+		
+	if not wide_receiver_4.has_ball:
+		# Check the current state of WR1
+		match wr4_state:
+			# If the state is NOT_MOVING, switch it to MOVING_NORTH
+			WRState.INITIAL:
+				wr4_state = WRState.MOVING_NORTH
+
+			# Move straight north until reaching the target position
+			WRState.MOVING_NORTH:
+				if wide_receiver_4.position.y > line_of_scrimmage.y - 100:
+					wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
+				else:
+					# Switch to southwest movement once target is reached
+					wr4_state = WRState.MOVING_SOUTHWEST
+
+			# Move southwest after moving north
+			WRState.MOVING_SOUTHWEST:
+				if wide_receiver_4.position.y < line_of_scrimmage.y - 100:
+					wide_receiver_4.velocity = Vector2(wide_receiver_4.speed / 2, wide_receiver_4.speed / 2)  # Move southwest
+				else:
+					wr4_state = WRState.NOT_MOVING
+			
+			WRState.NOT_MOVING:
+				wide_receiver_4.velocity = Vector2(0, 0)
+
+		# Move the receiver
+		wide_receiver_4.move_and_slide()
+		
+	if not runningback.has_ball:
+		# move RB NorthWest
+		runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
+
+		# Move the wide receiver
+		runningback.move_and_slide()

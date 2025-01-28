@@ -2,7 +2,7 @@ extends RigidBody2D
 
 @onready var game_scene = get_node("/root/GameScene")
 
-@export var speed = 90  # Speed at which the tackle chases the QB
+@export var speed = 120  # Speed at which the tackle chases the QB
 var blocked_speed = 3
 
 var random_duration = 0.0

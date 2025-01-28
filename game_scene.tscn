@@ -1036,4 +1036,5 @@ shape = SubResource("RectangleShape2D_atsk8")
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]
 [connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Slant" to="PauseNode" method="_on_slant_pressed"]
 [connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Go" to="PauseNode" method="_on_go_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Curls" to="PauseNode" method="_on_curls_pressed"]
 [connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Punt" to="PauseNode" method="_on_punt_pressed"]
