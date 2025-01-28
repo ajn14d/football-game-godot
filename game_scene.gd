@@ -25,6 +25,7 @@ var wr1_state = WRState.INITIAL  # Initial state
 var wr2_state = WRState.INITIAL  # Initial state
 var wr3_state = WRState.INITIAL  # Initial state
 var wr4_state = WRState.INITIAL  # Initial state
+var rb_state = WRState.INITIAL
 
 # Define the position for the line of scrimmage
 var line_of_scrimmage: Vector2 = Vector2(0, 544)
@@ -269,6 +270,7 @@ func pre_play() -> void:
 	wr2_state = WRState.INITIAL  # Initial state
 	wr3_state = WRState.INITIAL  # Initial state
 	wr4_state = WRState.INITIAL  # Initial state
+	rb_state = WRState.INITIAL
 	
 	center.after_block_engage = false
 	center.is_blocked = false
@@ -445,100 +447,138 @@ func _on_football_area_entered(area: Area2D) -> void:
 
 #PlayBook
 func pass_play_1() -> void:
-	
 	# Bools to tell if run play or pass play
 	run_play = false
 	pass_play = true
 	
 	if not wide_receiver_1.has_ball:
-		# Move straight north until the receiver has traveled the specified distance
-		if wide_receiver_1.position.y > line_of_scrimmage.y -25:
-			wide_receiver_1.velocity = Vector2(0, -wide_receiver_1.speed)  # Move straight north
-		else:
-			# Once the receiver has moved 100 units, change direction to northwest
-			wide_receiver_1.velocity = Vector2(-wide_receiver_1.speed / 2, -wide_receiver_1.speed / 2)  # Move northwest
-
+		match wr1_state:
+			WRState.INITIAL:
+				wr1_state = WRState.MOVING_NORTH  # Start moving north
+			WRState.MOVING_NORTH:
+				if wide_receiver_1.position.y > line_of_scrimmage.y - 25:
+					wide_receiver_1.velocity = Vector2(0, -wide_receiver_1.speed)  # Move straight north
+				else:
+					wr1_state = WRState.MOVING_NORTHWEST  # Change direction to northwest
+			WRState.MOVING_NORTHWEST:
+				wide_receiver_1.velocity = Vector2(-wide_receiver_1.speed / 2, -wide_receiver_1.speed / 2)  # Move northwest
+		
 		# Move the wide receiver
 		wide_receiver_1.move_and_slide()
 	
 	if not wide_receiver_2.has_ball:
-		# Move straight north until the receiver has traveled the specified distance
-		if wide_receiver_2.position.y > line_of_scrimmage.y -5:
-			wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
-		else:
-			# Once the receiver has moved 100 units, change direction to northwest
-			wide_receiver_2.velocity = Vector2(wide_receiver_2.speed / 2, -wide_receiver_2.speed / 2)  # Move northwest
-
+		match wr2_state:
+			WRState.INITIAL:
+				wr2_state = WRState.MOVING_NORTH  # Start moving north
+			WRState.MOVING_NORTH:
+				if wide_receiver_2.position.y > line_of_scrimmage.y - 5:
+					wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
+				else:
+					wr2_state = WRState.MOVING_NORTHWEST  # Change direction to northwest
+			WRState.MOVING_NORTHWEST:
+				wide_receiver_2.velocity = Vector2(wide_receiver_2.speed / 2, -wide_receiver_2.speed / 2)  # Move northwest
+		
 		# Move the wide receiver
 		wide_receiver_2.move_and_slide()
-		
+	
 	if not wide_receiver_3.has_ball:
-		# Move straight north until the receiver has traveled the specified distance
-		if wide_receiver_3.position.y > line_of_scrimmage.y -55:
-			wide_receiver_3.velocity = Vector2(0, -wide_receiver_3.speed)  # Move straight north
-		else:
-			# Once the receiver has moved 100 units, change direction to northwest
-			wide_receiver_3.velocity = Vector2(-wide_receiver_2.speed / 2, -wide_receiver_3.speed / 2)  # Move northwest
-
+		match wr3_state:
+			WRState.INITIAL:
+				wr3_state = WRState.MOVING_NORTH  # Start moving north
+			WRState.MOVING_NORTH:
+				if wide_receiver_3.position.y > line_of_scrimmage.y - 55:
+					wide_receiver_3.velocity = Vector2(0, -wide_receiver_3.speed)  # Move straight north
+				else:
+					wr3_state = WRState.MOVING_NORTHWEST  # Change direction to northwest
+			WRState.MOVING_NORTHWEST:
+				wide_receiver_3.velocity = Vector2(-wide_receiver_3.speed / 2, -wide_receiver_3.speed / 2)  # Move northwest
+		
 		# Move the wide receiver
 		wide_receiver_3.move_and_slide()
-		
+	
 	if not wide_receiver_4.has_ball:
-		# Move straight north until the receiver has traveled the specified distance
-		if wide_receiver_4.position.y > line_of_scrimmage.y -55:
-			wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
-		else:
-			# Once the receiver has moved 100 units, change direction to northwest
-			wide_receiver_4.velocity = Vector2(wide_receiver_4.speed / 2, -wide_receiver_4.speed / 2)  # Move northwest
-
+		match wr4_state:
+			WRState.INITIAL:
+				wr4_state = WRState.MOVING_NORTH  # Start moving north
+			WRState.MOVING_NORTH:
+				if wide_receiver_4.position.y > line_of_scrimmage.y - 55:
+					wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
+				else:
+					wr4_state = WRState.MOVING_NORTHWEST  # Change direction to northwest
+			WRState.MOVING_NORTHWEST:
+				wide_receiver_4.velocity = Vector2(wide_receiver_4.speed / 2, -wide_receiver_4.speed / 2)  # Move northwest
+		
 		# Move the wide receiver
 		wide_receiver_4.move_and_slide()
-		
+	
 	if not runningback.has_ball:
-		# move RB NorthWest
-		runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
-
-		# Move the wide receiver
+		match rb_state:
+			WRState.INITIAL:
+				rb_state = WRState.MOVING_NORTHWEST  # Start moving northwest
+			WRState.MOVING_NORTHWEST:
+				runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
+		
+		# Move the running back
 		runningback.move_and_slide()
 
 func pass_play_2() -> void:
-	
 	# Bools to tell if run play or pass play
 	run_play = false
 	pass_play = true
 	
 	if not wide_receiver_1.has_ball:
-		# Move straight 
-		wide_receiver_1.velocity = Vector2(0, -wide_receiver_1.speed)  # Move straight north
+		match wr1_state:
+			WRState.INITIAL:
+				wr1_state = WRState.MOVING_NORTH  # Transition to moving north
+			
+			WRState.MOVING_NORTH:
+				wide_receiver_1.velocity = Vector2(0, -wide_receiver_1.speed)  # Move straight north
 
+		# Move the wide receiver
 		wide_receiver_1.move_and_slide()
 	
 	if not wide_receiver_2.has_ball:
-		# Move straight 
-		wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
-		
+		match wr2_state:
+			WRState.INITIAL:
+				wr2_state = WRState.MOVING_NORTH  # Transition to moving north
+			
+			WRState.MOVING_NORTH:
+				wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
+
 		# Move the wide receiver
 		wide_receiver_2.move_and_slide()
 		
 	if not wide_receiver_3.has_ball:
-		# Move straight 
-		wide_receiver_3.velocity = Vector2(0, -wide_receiver_3.speed)  # Move straight north
-		
+		match wr3_state:
+			WRState.INITIAL:
+				wr3_state = WRState.MOVING_NORTH  # Transition to moving north
+			
+			WRState.MOVING_NORTH:
+				wide_receiver_3.velocity = Vector2(0, -wide_receiver_3.speed)  # Move straight north
+
 		# Move the wide receiver
 		wide_receiver_3.move_and_slide()
 		
 	if not wide_receiver_4.has_ball:
-		# Move straight 
-		wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
-		
+		match wr4_state:
+			WRState.INITIAL:
+				wr4_state = WRState.MOVING_NORTH  # Transition to moving north
+			
+			WRState.MOVING_NORTH:
+				wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
+
 		# Move the wide receiver
 		wide_receiver_4.move_and_slide()
 		
 	if not runningback.has_ball:
-		# move RB NorthWest
-		runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
+		match rb_state:
+			WRState.INITIAL:
+				rb_state = WRState.MOVING_WEST  # Transition to moving west
+			
+			WRState.MOVING_WEST:
+				runningback.velocity = Vector2(-runningback.speed, 0)  # Move West
 
-		# Move the wide receiver
+		# Move the running back
 		runningback.move_and_slide()
 
 func pass_play_3() -> void:
@@ -659,8 +699,12 @@ func pass_play_3() -> void:
 		wide_receiver_4.move_and_slide()
 		
 	if not runningback.has_ball:
-		# move RB NorthWest
-		runningback.velocity = Vector2(-runningback.speed, 0)  # Move northwest
+		match rb_state:
+			WRState.INITIAL:
+				rb_state = WRState.MOVING_WEST  # Transition to moving west
+			
+			WRState.MOVING_WEST:
+				runningback.velocity = Vector2(-runningback.speed, 0)  # Move West
 
-		# Move the wide receiver
+		# Move the running back
 		runningback.move_and_slide()
