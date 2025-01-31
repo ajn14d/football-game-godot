@@ -641,10 +641,10 @@ func pass_play_3() -> void:
 					wide_receiver_2.velocity = Vector2(0, -wide_receiver_2.speed)  # Move straight north
 				else:
 					# Switch to southwest movement once target is reached
-					wr2_state = WRState.MOVING_SOUTHWEST
+					wr2_state = WRState.MOVING_SOUTHEAST
 
 			# Move southwest after moving north
-			WRState.MOVING_SOUTHWEST:
+			WRState.MOVING_SOUTHEAST:
 				if wide_receiver_2.position.y < line_of_scrimmage.y - 100:
 					wide_receiver_2.velocity = Vector2(wide_receiver_2.speed / 2, wide_receiver_2.speed / 2)  # Move southwest
 				else:
@@ -673,7 +673,7 @@ func pass_play_3() -> void:
 
 			# Move southwest after moving north
 			WRState.MOVING_SOUTHWEST:
-				if wide_receiver_3.position.y < line_of_scrimmage.y - 100:
+				if wide_receiver_3.position.y < line_of_scrimmage.y - 80:
 					wide_receiver_3.velocity = Vector2(-wide_receiver_3.speed / 2, wide_receiver_3.speed / 2)  # Move southwest
 				else:
 					wr3_state = WRState.NOT_MOVING
@@ -697,11 +697,11 @@ func pass_play_3() -> void:
 					wide_receiver_4.velocity = Vector2(0, -wide_receiver_4.speed)  # Move straight north
 				else:
 					# Switch to southwest movement once target is reached
-					wr4_state = WRState.MOVING_SOUTHWEST
+					wr4_state = WRState.MOVING_SOUTHEAST
 
 			# Move southwest after moving north
-			WRState.MOVING_SOUTHWEST:
-				if wide_receiver_4.position.y < line_of_scrimmage.y - 100:
+			WRState.MOVING_SOUTHEAST:
+				if wide_receiver_4.position.y < line_of_scrimmage.y - 80:
 					wide_receiver_4.velocity = Vector2(wide_receiver_4.speed / 2, wide_receiver_4.speed / 2)  # Move southwest
 				else:
 					wr4_state = WRState.NOT_MOVING

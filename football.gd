@@ -140,11 +140,3 @@ func pitch_football():
 		rotation += qb_rotation  # Adjust the rotation based on QB's current rotation
 		
 		football_thrown = true
-
-		# Print the resulting velocity for debugging
-		#print("Throw direction:", direction)
-		#print("Linear velocity:", linear_velocity)
-
-		#print("Football thrown!")
-	else:
-		print("Quarterback not found!")
