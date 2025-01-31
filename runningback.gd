@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 70  # Normal movement speed
 @export var sprint_speed = 150  # Sprint speed
-@export var max_stamina = 100  # Maximum stamina
+@export var max_stamina = 50  # Maximum stamina
 @export var stamina_depletion_rate = 40  # Stamina drained per second
 
 @onready var game_scene = get_node("/root/GameScene")

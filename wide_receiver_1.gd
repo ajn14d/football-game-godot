@@ -15,6 +15,8 @@ extends CharacterBody2D
 @onready var wide_receiver_3 = get_node("/root/GameScene/WideReceiver3")
 @onready var wide_receiver_4 = get_node("/root/GameScene/WideReceiver4")
 
+@onready var defensive_back_1 = get_node("/root/GameScene/DefensiveBack1")
+
 var has_ball = false
 var current_stamina = max_stamina  # Current stamina
 var current_speed = speed  # Current speed, adjusted dynamically
@@ -58,6 +60,23 @@ func _process(delta):
 
 	# Debug stamina and speed (optional)
 	# print("Stamina:", current_stamina, "Speed:", current_speed)
+
+# Function to move the WR towards the DB
+func engage():
+	# Offset the target position slightly downward (increase Y value)
+	var target_position = defensive_back_1.global_position + Vector2(0, 10)  
+
+	# Calculate direction to the adjusted position
+	var direction_to_db1 = (target_position - global_position).normalized()
+
+	# Set the velocity
+	velocity = direction_to_db1 * speed
+	move_and_slide()  # Ensure movement is applied)
+
+# Function to stop movement (called during a block)
+func block():
+	# Stop all movement
+	velocity = Vector2.ZERO
 
 # Reset stamina and speed for a new play
 func reset_stamina():

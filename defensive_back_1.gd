@@ -47,19 +47,19 @@ func _physics_process(delta):
 	if not wr1:
 		return  # No football found; do nothing
 	# Only call pursue if RDT is not blocked
-	if not is_blocked and not wr1.has_ball and pre_cover_:
+	if not is_blocked and not game_scene.run_play and not wr1.has_ball and pre_cover_:
 		pre_cover()
 	elif not is_blocked and not wr1.has_ball and not rb.has_ball and not pre_cover_ and not game_scene.run_play and not football.past_los:
 		cover()
-	elif football.football_thrown and wr1.has_ball:
+	elif not is_blocked and football.football_thrown and wr1.has_ball:
 		pursue_wr()
-	elif game_scene.run_play:
+	elif not is_blocked and game_scene.run_play:
 		pursue_rb()
-	elif rb.has_ball:
+	elif not is_blocked and rb.has_ball:
 		pursue_rb()
-	elif qb.has_ball and football.past_los:
+	elif not is_blocked and qb.has_ball and football.past_los:
 		pursue_qb()
-	elif wr1.has_ball or wr2.has_ball or wr3.has_ball or wr4.has_ball:
+	elif not is_blocked and wr1.has_ball or wr2.has_ball or wr3.has_ball or wr4.has_ball:
 		pursue()
 
 # Function to for the RDT to cover the WR
@@ -182,23 +182,25 @@ func pursue_qb():
 
 # Function to reduce movement (called during a block)
 func blocked():
-	# Calculate direction to the QB
-	var direction_to_wr1 = (wr1.global_position - global_position).normalized()
-	
-	# reduce movement
-	linear_velocity = direction_to_wr1 * blocked_speed
-	is_blocked = true  # Set the flag to indicate the block
-	block_timer.start()  # Start the timer to attempt breaking the block
+	if game_scene.run_play:
+		print("DB1 being blocked")
+		# Calculate direction to the QB
+		var direction_to_wr1 = (wr1.global_position - global_position).normalized()
+		
+		# reduce movement
+		linear_velocity = direction_to_wr1 * blocked_speed
+		is_blocked = true  # Set the flag to indicate the block
+		block_timer.start()  # Start the timer to attempt breaking the block
 
 # Function to handle detection event when C enters the area
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("C"):
+	if body.is_in_group("WR"):
 		#print("OG detected")
-		blocked()  # Stop movement when OG is detected
+		blocked()  # Stop movement when WR is detected
 
 # Function to handle detection event when C exits the area
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("C"):
+	if body.is_in_group("WR"):
 		#print("OG exited, resuming pursuit")
 		is_blocked = false  # Reset the flag to allow pursuit again
 		block_timer.stop()  # Stop the timer when no longer blocked

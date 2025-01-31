@@ -1,3 +1,5 @@
+#WARNING mostly spaghetti code
+
 extends Node2D
 
 var play_ended: bool = false  # Tracks whether the play has ended
@@ -742,3 +744,7 @@ func run_play_1() -> void:
 
 		# Move the running back 
 		runningback.move_and_slide()
+	wide_receiver_1.engage()
+	wide_receiver_2.engage()
+	wide_receiver_3.engage()
+	wide_receiver_4.engage()
