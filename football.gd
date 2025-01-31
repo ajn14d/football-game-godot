@@ -3,7 +3,7 @@ extends RigidBody2D
 var has_ball = false
 var past_los = false
 var football_thrown = false
-@export var throw_force: float = 450  # Force applied when the football is thrown
+@export var throw_force: float = 500  # Force applied when the football is thrown
 @onready var quarterback = get_node("/root/GameScene/Quarterback")
 @onready var running_back = get_node("/root/GameScene/Runningback")  # Reference to the RB node
 @onready var wide_receiver_1 = get_node("/root/GameScene/WideReceiver1")

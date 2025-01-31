@@ -8,7 +8,7 @@ var football: RigidBody2D  # Reference to the football node
 var home_score = 0
 var away_score = 0
 
-var snap_speed = 200
+var snap_speed = 300
 
 var tackled = false
 var incomplete = false
@@ -227,14 +227,19 @@ func end_of_play() -> void:
 		$LineOfScrimmage.position = line_of_scrimmage
 		#print("New Line of Scrimmage Y Position: ", line_of_scrimmage.y)
 		
-		# Check if the line of scrimmage is at or past -725
-		if line_of_scrimmage.y <= -725:
+		# Check if the line of scrimmage is at or past -725 (10-yard line)
+		if line_of_scrimmage.y <= -725 and $FirstDown.position.y >= $LineOfScrimmage.position.y:
 			$FirstDown.position = Vector2($FirstDown.position.x, -900)
+			down_counter = 0
 			#print("First Down set to -900 because Line of Scrimmage is <= -725")
+		# Only reset and place first down marker if a first down is achieved
 		elif $FirstDown.position.y >= $LineOfScrimmage.position.y:
 			$FirstDown.position = Vector2($FirstDown.position.x, line_of_scrimmage.y - 182)
 			print("First Down!")
-			down_counter = 0
+			down_counter = 0  # Reset down counter only if first down is made
+		else:
+			# If no first down, don't move the first down marker
+			print("No first down. First down marker not moved.")
 		
 		football.linear_velocity = Vector2(0, 0)
 		
