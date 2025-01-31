@@ -9,6 +9,7 @@ extends RigidBody2D
 @onready var wr4 = get_node("/root/GameScene/WideReceiver4")
 
 @export var speed = 85  # Speed at which the tackle chases the QB
+@export var run_play_speed = 100
 var blocked_speed = 3
 
 # Reference to the Football node
@@ -85,8 +86,11 @@ func pursue():
 	# Calculate direction to the QB
 	var direction_to_football = (football.global_position - global_position).normalized()
 
-	# Set the RDT's velocity directly
-	linear_velocity = direction_to_football * speed
+	if game_scene.run_play:
+		# Set the MLB velocity for run play
+		linear_velocity = direction_to_football * run_play_speed
+	else:
+		linear_velocity = direction_to_football * speed
 
 # Function to reduce movement (called during a block)
 func blocked():

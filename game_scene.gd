@@ -748,3 +748,5 @@ func run_play_1() -> void:
 	wide_receiver_2.engage()
 	wide_receiver_3.engage()
 	wide_receiver_4.engage()
+	quarterback.velocity = Vector2(0, quarterback.speed)
+	quarterback.move_and_slide()
