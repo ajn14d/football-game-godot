@@ -179,6 +179,8 @@ func _process(delta: float) -> void:
 			pass_play_2()
 		elif pause_node.play_select == 3:
 			pass_play_3()
+		elif pause_node.play_select == 4:
+			run_play_1()
 	if tackled:
 		# Remove the ball from all potential ball carriers
 		quarterback.has_ball = false 
@@ -265,6 +267,8 @@ func pre_play() -> void:
 	wide_receiver_2.has_ball = false
 	wide_receiver_3.has_ball = false
 	wide_receiver_4.has_ball = false
+	
+	reset_all_stamina()
 	
 	wr1_state = WRState.INITIAL  # Initial state
 	wr2_state = WRState.INITIAL  # Initial state
@@ -444,6 +448,16 @@ func _on_football_area_entered(area: Area2D) -> void:
 	
 	if area.is_in_group("Touchdown"):
 		ball_in_endzone = true
+
+func reset_all_stamina():
+	#resets stamina for offensive players
+	quarterback.reset_stamina()
+	runningback.reset_stamina()
+	wide_receiver_1.reset_stamina()
+	wide_receiver_2.reset_stamina()
+	wide_receiver_3.reset_stamina()
+	wide_receiver_4.reset_stamina()
+
 
 #PlayBook
 func pass_play_1() -> void:
@@ -707,4 +721,24 @@ func pass_play_3() -> void:
 				runningback.velocity = Vector2(-runningback.speed, 0)  # Move West
 
 		# Move the running back
+		runningback.move_and_slide()
+
+func run_play_1() -> void:
+	
+	# Bools to tell if run play or pass play
+	run_play = true
+	pass_play = false
+	
+	if quarterback.has_ball:
+		football.pitch_football()
+	
+	if not runningback.has_ball:
+		match rb_state:
+			WRState.INITIAL:
+				rb_state = WRState.MOVING_EAST  # Transition to moving west
+			
+			WRState.MOVING_EAST:
+				runningback.velocity = Vector2(runningback.speed, -10)  # Move West
+
+		# Move the running back 
 		runningback.move_and_slide()

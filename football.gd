@@ -113,3 +113,38 @@ func throw_football():
 		#print("Football thrown!")
 	else:
 		print("Quarterback not found!")
+
+func pitch_football():
+	# Ensure quarterback is not null before accessing its position
+	if quarterback != null and not past_los:
+		# Calculate the direction from the quarterback to the mouse position
+		var direction = Vector2(-1, 0)
+
+		# Detach the football from the quarterback, but first, get the QB's rotation
+		var qb_rotation = quarterback.rotation  # Capture QB's rotation before unsetting it
+		has_ball = false
+		quarterback = null  # Unset QB reference
+		running_back = null  # Unset RB reference
+		wide_receiver_1 = null # Unset WR reference
+		wide_receiver_2 = null # Unset WR reference
+		wide_receiver_3 = null # Unset WR reference
+		wide_receiver_4 = null # Unset WR reference
+
+		# Apply an initial velocity in the direction of the mouse position
+		linear_velocity = direction * throw_force  # Apply the throw force
+
+		# Rotate the football to face the direction of travel with a 90-degree offset
+		rotation = linear_velocity.angle()
+
+		# Now add the QB's rotation to the throw's rotation
+		rotation += qb_rotation  # Adjust the rotation based on QB's current rotation
+		
+		football_thrown = true
+
+		# Print the resulting velocity for debugging
+		#print("Throw direction:", direction)
+		#print("Linear velocity:", linear_velocity)
+
+		#print("Football thrown!")
+	else:
+		print("Quarterback not found!")

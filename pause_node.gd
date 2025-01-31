@@ -7,7 +7,7 @@ extends Node
 
 @onready var play_menu = $PlaySelect
 
-@onready var punt_play = $PlaySelect/HBoxContainer/Punt
+@onready var punt_play = $PlaySelect/PassPlays/Punt
 
 var timer_accumulator: float = 0  # Accumulator for time tracking
 var interval: float = 1.0  # Interval in seconds (once per second)
@@ -55,3 +55,7 @@ func _on_curls_pressed() -> void:
 
 func _on_punt_pressed() -> void:
 	print("Punt")
+
+func _on_hb_dive_pressed() -> void:
+	print("Next Play: HB Dive")
+	play_select = 4

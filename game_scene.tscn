@@ -959,26 +959,36 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PauseNode/PlaySelect"]
+[node name="PassPlays" type="HBoxContainer" parent="PauseNode/PlaySelect"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Slant" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
+[node name="Slant" type="Button" parent="PauseNode/PlaySelect/PassPlays"]
 layout_mode = 2
 text = "Slant"
 
-[node name="Go" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
-layout_mode = 2
-text = "   Go   "
-
-[node name="Curls" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
+[node name="Curls" type="Button" parent="PauseNode/PlaySelect/PassPlays"]
 layout_mode = 2
 text = "Curls"
 
-[node name="Punt" type="Button" parent="PauseNode/PlaySelect/HBoxContainer"]
+[node name="Go" type="Button" parent="PauseNode/PlaySelect/PassPlays"]
+layout_mode = 2
+text = "   Go   "
+
+[node name="Punt" type="Button" parent="PauseNode/PlaySelect/PassPlays"]
 layout_mode = 2
 text = "Punt"
+
+[node name="RunPlays" type="HBoxContainer" parent="PauseNode/PlaySelect"]
+layout_mode = 0
+offset_top = -41.0
+offset_right = 40.0
+offset_bottom = -1.0
+
+[node name="HBDive" type="Button" parent="PauseNode/PlaySelect/RunPlays"]
+layout_mode = 2
+text = "HB Dive"
 
 [node name="LineOfScrimmage" type="Area2D" parent="." groups=["LOS"]]
 
@@ -1034,7 +1044,8 @@ position = Vector2(-1.5, -994)
 shape = SubResource("RectangleShape2D_atsk8")
 
 [connection signal="body_entered" from="Football" to="." method="_on_football_body_entered"]
-[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Slant" to="PauseNode" method="_on_slant_pressed"]
-[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Go" to="PauseNode" method="_on_go_pressed"]
-[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Curls" to="PauseNode" method="_on_curls_pressed"]
-[connection signal="pressed" from="PauseNode/PlaySelect/HBoxContainer/Punt" to="PauseNode" method="_on_punt_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/PassPlays/Slant" to="PauseNode" method="_on_slant_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/PassPlays/Curls" to="PauseNode" method="_on_curls_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/PassPlays/Go" to="PauseNode" method="_on_go_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/PassPlays/Punt" to="PauseNode" method="_on_punt_pressed"]
+[connection signal="pressed" from="PauseNode/PlaySelect/RunPlays/HBDive" to="PauseNode" method="_on_hb_dive_pressed"]
