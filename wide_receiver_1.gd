@@ -7,6 +7,14 @@ extends CharacterBody2D
 @export var ball_speed_min = 40  # Minimum speed when holding the ball
 @export var speed_reduction_rate = 10  # Speed reduction per second
 
+@onready var game_scene = get_node("/root/GameScene")
+
+@onready var quarterback = get_node("/root/GameScene/Quarterback")
+@onready var runningback = get_node("/root/GameScene/Runningback")
+@onready var wide_receiver_2 = get_node("/root/GameScene/WideReceiver2")
+@onready var wide_receiver_3 = get_node("/root/GameScene/WideReceiver3")
+@onready var wide_receiver_4 = get_node("/root/GameScene/WideReceiver4")
+
 var has_ball = false
 var current_stamina = max_stamina  # Current stamina
 var current_speed = speed  # Current speed, adjusted dynamically
@@ -57,7 +65,7 @@ func reset_stamina():
 	current_speed = speed
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("football"):
+	if body.is_in_group("football") and not quarterback.has_ball and not runningback.has_ball and not wide_receiver_2.has_ball and not wide_receiver_3.has_ball and not wide_receiver_4.has_ball:
 		has_ball = true
 
 func _on_detection_area_body_exited(body: Node2D) -> void:

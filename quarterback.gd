@@ -5,6 +5,14 @@ extends CharacterBody2D
 @export var max_stamina = 0  # Maximum stamina
 @export var stamina_depletion_rate = 40  # Stamina drained per second
 
+@onready var game_scene = get_node("/root/GameScene")
+
+@onready var runningback = get_node("/root/GameScene/Runningback")
+@onready var wide_receiver_1 = get_node("/root/GameScene/WideReceiver1")
+@onready var wide_receiver_2 = get_node("/root/GameScene/WideReceiver2")
+@onready var wide_receiver_3 = get_node("/root/GameScene/WideReceiver3")
+@onready var wide_receiver_4 = get_node("/root/GameScene/WideReceiver4")
+
 var has_ball = false
 
 var current_stamina = max_stamina  # Current stamina
@@ -46,7 +54,7 @@ func reset_stamina():
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("football"):
+	if body.is_in_group("football") and not runningback.has_ball and not wide_receiver_1.has_ball  and not wide_receiver_2.has_ball and not wide_receiver_3.has_ball and not wide_receiver_4.has_ball:
 		has_ball = true
 
 
