@@ -238,10 +238,15 @@ func end_of_play() -> void:
 			print("First Down!")
 			down_counter = 0  # Reset down counter only if first down is made
 		else:
+			pass
 			# If no first down, don't move the first down marker
-			print("No first down. First down marker not moved.")
+			#print("No first down. First down marker not moved.")
 		
 		football.linear_velocity = Vector2(0, 0)
+		
+		if down_counter >= 4:
+			print("opponent posession")
+			get_tree().change_scene_to_file("res://opponent_possession.tscn")
 		
 		# Reset players to pre-play positions
 		pre_play()
