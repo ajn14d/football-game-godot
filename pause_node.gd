@@ -55,7 +55,7 @@ func _on_curls_pressed() -> void:
 
 func _on_punt_pressed() -> void:
 	print("Punt")
-
+	play_select = 10
 func _on_hb_dive_pressed() -> void:
 	print("Next Play: HB Dive")
 	play_select = 4

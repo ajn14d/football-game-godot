@@ -183,6 +183,8 @@ func _process(delta: float) -> void:
 			pass_play_3()
 		elif pause_node.play_select == 4:
 			run_play_1()
+		elif pause_node.play_select == 10:
+			get_tree().change_scene_to_file("res://opponent_possession.tscn")
 	if tackled:
 		# Remove the ball from all potential ball carriers
 		quarterback.has_ball = false 
