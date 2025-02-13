@@ -209,6 +209,8 @@ func _process(delta: float) -> void:
 		if quarterback.has_ball or runningback.has_ball or wide_receiver_1.has_ball or wide_receiver_2.has_ball or wide_receiver_3.has_ball or wide_receiver_4.has_ball:
 			print("Touchdown!!!")
 			ball_in_endzone = false
+			GameStats.home_score += 7
+			get_tree().change_scene_to_file("res://opponent_possession.tscn")
 
 # Handle input to trigger the end_of_play function
 func _input(event: InputEvent) -> void:

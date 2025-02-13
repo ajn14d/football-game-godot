@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw0knjb24b7ux"]
+[gd_scene load_steps=3 format=3 uid="uid://bw0knjb24b7ux"]
 
+[ext_resource type="Script" path="res://opponent_possession.gd" id="1_786fa"]
 [ext_resource type="Texture2D" uid="uid://cxdmg43q72fbi" path="res://art/field.png" id="1_dlu3p"]
 
 [node name="OpponentPossession" type="Node2D"]
+script = ExtResource("1_786fa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-57, -16)

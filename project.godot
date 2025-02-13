@@ -15,6 +15,10 @@ run/main_scene="res://game_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://art/icon.svg"
 
+[autoload]
+
+GameStats="*res://game_stats.gd"
+
 [global_group]
 
 QB=""
