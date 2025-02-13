@@ -262,8 +262,11 @@ func incomplete_pass() -> void:
 		get_tree().paused = true  # Pause the entire game
 		#print("Play Ended")
 		
-		# Reset players to pre-play positions
-		pre_play()
+		if down_counter >= 4:
+			print("opponent posession")
+			get_tree().change_scene_to_file("res://opponent_possession.tscn")
+		else:
+			pre_play()
 
 # Function to reset players' positions to pre-play positions
 func pre_play() -> void:
