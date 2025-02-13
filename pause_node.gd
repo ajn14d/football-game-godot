@@ -4,6 +4,7 @@ extends Node
 @export var play_select = 0
 
 @onready var game_scene = get_node("/root/GameScene")
+@onready var scoreboard_label = $PlaySelect/ScoreBoard
 
 @onready var play_menu = $PlaySelect
 
@@ -13,6 +14,7 @@ var timer_accumulator: float = 0  # Accumulator for time tracking
 var interval: float = 1.0  # Interval in seconds (once per second)
 
 func _process(delta: float) -> void:
+	update_scoreboard()
 	timer_accumulator += delta
 	if timer_accumulator >= interval:
 		timer_accumulator = 0  # Reset the timer
@@ -40,6 +42,10 @@ func _input(event: InputEvent) -> void:
 			play_menu.visible = false  # Disable the visibility of the menu
 		else:
 			print("Select Play!")
+
+func update_scoreboard():
+	# Update the scoreboard with current scores
+	scoreboard_label.text = "HOME: %d  AWAY: %d" % [GameStats.home_score, GameStats.away_score]
 
 func _on_slant_pressed() -> void:
 	print("Next Play: Quick Slants")
