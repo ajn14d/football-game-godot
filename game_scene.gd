@@ -1,5 +1,3 @@
-#WARNING mostly spaghetti code
-
 extends Node2D
 
 var play_ended: bool = false  # Tracks whether the play has ended
